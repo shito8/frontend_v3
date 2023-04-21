@@ -1,0 +1,58 @@
+@use './globals' as global;
+@use './component.setting' as setting;
+
+.header__main{
+    height: 80px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .header__logo{
+        img{
+            height: 30px;
+            width: auto;
+        }
+    }
+    .header__nav{
+
+        .setting__button{
+            @include global.btn_header();
+            background-color: global.$background-color-light;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            svg{
+                cursor: pointer;
+            }
+
+        }
+    }
+
+
+}
+
+body.dark{
+    .header__main{
+/*         .header__logo{
+
+        } */
+        .header__nav{
+    
+            .setting__button{
+                background-color: global.$background-color-dark;
+                
+
+            }
+        }
+
+    }
+
+
+
+}
+
+
+
+
+
+

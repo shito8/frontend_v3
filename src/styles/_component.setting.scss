@@ -1,0 +1,148 @@
+@use './globals' as global;
+
+
+.setting__menu{
+
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 260px;
+    height: 290px;
+    border-radius: 6px;
+    background-color: global.$background-color-light;
+    padding: 20px 15px;
+
+    .close{
+        position: absolute;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .setting__item{
+        margin-bottom: 15px;
+        p{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            text-align: left;
+            margin-bottom: 10px;
+            font-weight: global.$font-weight-semibold;
+        }
+        .themeMode{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid global.$primary-color-light;
+            height: 36px;
+            border-radius: 6px;
+            .themeMode__item{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: global.$font-weight-semibold;
+                border-radius: 6px;
+                width: 32%;
+                height: 30px;
+                cursor: pointer;
+            }
+            .themeMode__item.active{
+                background: global.$primary-color-light;
+            }
+        }
+        .language{
+            position: relative;
+            p{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                height: 36px;
+                border-radius: 6px;
+                border: 1px solid global.$primary-color-light;
+                background-color: global.$background-color-light;
+                outline: none;
+                cursor: pointer;
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                padding: 0 10px;
+                font-size: 14px;
+                font-weight: global.$font-weight-semibold;
+            }
+            .language__list{
+                position: absolute;
+                z-index: 2;
+                border-radius: 6px;
+                background-color: global.$background-color-light;
+                width: 100%;
+                .language__item{
+                    display: flex;
+                    align-items: center;
+                    text-align: left;
+                    padding: 0 10px;
+                    font-size: 14px;
+                    font-weight: global.$font-weight-semibold;
+                    height: 30px;
+                    &:hover{
+                        background-color: global.$light-color-disable;
+                        border-radius: 6px;
+                    }
+                    &.active{
+                        background-color: global.$primary-color-light;
+                        border-radius: 6px;
+                    }
+                    &.disabled{
+                        cursor: not-allowed;
+                    }
+                }
+            }
+
+        }
+        &:last-child{
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+}
+
+body.dark{
+
+    .setting__menu{
+        background-color: global.$background-color-dark;
+
+
+        .setting__item{
+            .themeMode{
+                border: 1px solid #787878;
+                .themeMode__item.active{
+                    background: global.$primary-color-dark;
+                }
+            }
+            .language{
+                p{
+                    border: 1px solid #787878;
+                    background-color: global.$background-color-dark;
+                }
+                .language__list{
+                    background-color: global.$background-color-dark;
+                    .language__item{
+                        &:hover{
+                            background-color: global.$dark-color-disable;
+                        }
+                        &.active{
+                            background-color: global.$primary-color-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

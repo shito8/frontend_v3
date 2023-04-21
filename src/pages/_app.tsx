@@ -3,6 +3,7 @@ import React, { useReducer, useEffect } from "react";
 import { reducer, initialState } from '@/reducers/reducer';
 import type { AppProps } from 'next/app';
 import { Action, State } from '@/types/types';
+import Header from '@/components/layouts/Header';
 
 export const AppContext = React.createContext<{
   state: State;
@@ -15,21 +16,26 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(()=>{
     const body = document.body;
-    if(localStorage.getItem('dark-mode')==='true'){
-      dispatch({type: 'themeMode', payload: true})
-      body.classList.add('dark');
-    }else{
-      dispatch({type: 'themeMode', payload: false})
-      body.classList.remove('dark');
+    const themeMode = localStorage.getItem('themeMode')
+    if(themeMode!==null){
+      const themeModeObj = JSON.parse(themeMode)
+      if(themeModeObj.dark === 'true'){
+        dispatch({type: 'themeMode', payload: true})
+        body.classList.add('dark');
+      }else{
+        dispatch({type: 'themeMode', payload: false})
+        body.classList.remove('dark');
+      }
     }
   },[state.darkMode])
 
   useEffect(() => {
     if(window !== undefined){
-      if(localStorage.getItem('dark-mode')===null){
+      if(localStorage.getItem('themeMode')===null){
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
         dispatch({type: 'themeMode', payload: mediaQuery.matches})
-        localStorage.setItem('dark-mode', mediaQuery.matches.toString())
+        const themeMode = {theme: 'system', dark: mediaQuery.matches.toString()}
+        localStorage.setItem('themeMode', JSON.stringify(themeMode))
       }
     }
 
@@ -37,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
         <AppContext.Provider value={{ state, dispatch }}>
+          <Header />
           <Component {...pageProps} />
         </AppContext.Provider>  
         );

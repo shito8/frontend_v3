@@ -1,9 +1,15 @@
+
 export interface State {
     darkMode: boolean;
     blockchain: Blockchain;
     usdBtc: string;
 
 };
+
+export interface SettingProps {
+    openSetting: boolean;
+    setOpenSetting: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export enum Blockchain {
     ERG = 'ERGO',

@@ -2,11 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from '../../pages/_app';
 import Setting from "../header/Setting";
-
+import Connect from "../header/Connect";
 
 
 
 export default function Header() {
+
+
 
     const appContext = useContext(AppContext);
     const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
@@ -30,14 +32,15 @@ export default function Header() {
         </div>
         <div className="header__nav">
 
-            <button className="setting__button">
+            <Connect />
+            <div className="setting__button">
                 <svg width="20" height="20" id='icon' onClick={handleSetting}>
                     <use href="/img/assets/gear.svg#icon"></use>
                 </svg>
                 {
                 openSetting && <Setting openSetting={openSetting} setOpenSetting={setOpenSetting} />
                 }
-            </button>
+            </div>
         </div>
 
 

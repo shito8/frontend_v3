@@ -2,6 +2,10 @@
 export interface State {
     darkMode: boolean;
     blockchain: Blockchain;
+    walletConnected: boolean;
+    walletAddressErg: string;
+    walletBalanceErg: string;
+    walletName: string;
     usdBtc: string;
 
 };
@@ -10,6 +14,12 @@ export interface SettingProps {
     openSetting: boolean;
     setOpenSetting: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface WalletConnectProps {
+    openWallet: boolean;
+    setOpenWallet: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 
 export enum Blockchain {
     ERG = 'ERGO',
@@ -20,4 +30,36 @@ export enum Blockchain {
 export type Action = 
     | {type: 'themeMode'; payload: boolean}
     | {type: 'selectBlockchain'; payload: Blockchain}
+    | {type: 'walletConnected'; payload: boolean}
+    | {type: 'walletAddressErg'; payload: string}
+    | {type: 'walletBalanceErg'; payload: string}   
+    | {type: 'walletName'; payload: string}         
     | {type: 'setUsdBtc'; payload: string};
+
+
+export interface AppConfig {
+    ergo:{
+        name: string;
+        status:{
+            connect:boolean;
+            wallet: string;
+        };
+        active: boolean;
+    };
+    cardano:{
+        name: string;
+        status:{
+            connect:boolean;
+            wallet: string;
+        };
+        active: boolean;
+    };
+    ethereum:{
+        name: string;
+        status:{
+            connect:boolean;
+            wallet: string;
+        };
+        active: boolean;
+    };
+}

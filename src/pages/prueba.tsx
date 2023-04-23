@@ -12,6 +12,17 @@ export default function Prueba() {
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
+  const [theme, setTheme] = useState('');
+
+  useEffect(() => {
+    const themeMode = localStorage.getItem('themeMode')
+    if(themeMode!==null){
+      const themeModeObj = JSON.parse(themeMode)
+      setTheme(themeModeObj.theme)
+    }
+
+  }, [theme])
+
   const handleToggle = () => {
     dispatch({type: 'themeMode', payload: !state?.darkMode})
     localStorage.setItem('dark-mode', (!state?.darkMode).toString())
@@ -23,18 +34,24 @@ export default function Prueba() {
 
 
   const handleThemeChange = (newTheme: string) => {
-
+    let theme, dark;
     if (newTheme === "light") {
         dispatch({type: 'themeMode', payload: false})
-        localStorage.setItem('dark-mode', 'false')
+        theme = 'light';
+        dark = false;
     } else if (newTheme === "dark") {
         dispatch({type: 'themeMode', payload: true})
-        localStorage.setItem('dark-mode', 'true')
+        theme = 'dark';
+        dark = true;
     } else {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       dispatch({type: 'themeMode', payload: mediaQuery.matches})
-      localStorage.setItem('dark-mode', mediaQuery.matches.toString())
+      theme = 'system';
+      dark = mediaQuery.matches;
     }
+    const themeMode = {theme, dark}
+    setTheme(theme)
+    localStorage.setItem('themeMode', JSON.stringify(themeMode))
   };
 
 
@@ -43,7 +60,24 @@ export default function Prueba() {
    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const payload = e.target.value as Blockchain;
     const action: Action = { type: 'selectBlockchain', payload };
-    dispatch(action);
+    const appConfig = JSON.parse(localStorage.getItem("appConfig")!);
+    
+    for(let key in appConfig){
+      if(appConfig.hasOwnProperty(key) && appConfig[key].name === payload){
+        dispatch({ type: "selectBlockchain", payload: payload });
+        dispatch({ type: "walletConnected", payload: state?.walletConnected ?? false });
+        dispatch({ type: "walletName", payload: state?.walletName ?? '' });
+
+        appConfig[key].active = true;
+      }
+      else{
+        appConfig[key].active = false;
+      }
+      
+    }
+
+    localStorage.setItem('appConfig', JSON.stringify(appConfig))
+
   }; 
 
   if (!state) {
@@ -75,6 +109,17 @@ export default function Prueba() {
         </select>
         <p>Seleccion: {state.blockchain}</p>
         <Link href='/'>A HOME</Link>
+
+        <p>Selected BlockChain</p>
+        <p>{state.blockchain}</p>
+        <p>Wallet Connected</p>
+        <p>{state.walletConnected?'true':"false"}</p>
+        <p>Wallet Name</p>
+        <p>{state.walletName === '' ? 'vacio' : state.walletName}</p>
+        <p>Address Ergo</p>
+        <p>{state.walletAddressErg}</p>
+        <p>Balance Ergo</p>
+        <p>{state.walletBalanceErg}</p>
       </main>
     </>
   )

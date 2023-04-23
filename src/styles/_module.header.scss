@@ -1,4 +1,5 @@
 @use './globals' as global;
+@use './component.connect' as connect;
 @use './component.setting' as setting;
 
 .header__main{
@@ -14,12 +15,13 @@
         }
     }
     .header__nav{
-
+        display: flex;
+        align-items: center;
+        gap: 15px;
         .setting__button{
             @include global.btn_header();
             background-color: global.$background-color-light;
             width: 40px;
-            height: 40px;
             position: relative;
             svg{
                 cursor: pointer;

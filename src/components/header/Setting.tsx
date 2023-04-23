@@ -84,7 +84,7 @@ export  default function  Setting(props: SettingProps) {
           <div className="language__list">        
           {
             languages.map((item, index) => (
-              <div className={`language__item ${item === "English" ? "active" : ""} ${item != "English" ? "disabled" : ""}`} key={index} onClick={() => handleLanguage()}>{item}</div>
+              <div className={`language__item ${item === "English" ? "active" : ""} ${item !== "English" ? "disabled" : ""}`} key={index} onClick={() => handleLanguage()}>{item}</div>
             ))
           }
           </div>

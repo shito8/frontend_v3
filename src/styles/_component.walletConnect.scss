@@ -1,0 +1,71 @@
+@use './globals' as global;
+
+.walletConnect{
+    @include global.popup();
+    section{
+        position: fixed;
+        top: 100px;
+        left: calc((100vw - 550px) /2);
+        width: 550px;
+        .popUp{
+            background-color: global.$background-color-light;
+            .title__pop{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 25px;
+                p{
+                    font-size: 14px;
+                    font-weight: global.$font-weight-semibold;
+                }
+                svg{
+                    cursor: pointer;
+                }
+            }.wallets__list{
+                width: 100%;
+                border: 1px solid global.$primary-color-light;
+                border-radius: 6px;
+                .wallet__item{
+                    padding: 0 20px;
+                    height: 80px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid global.$primary-color-light;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: global.$light-color-disable;
+                        border-radius: 6px;
+                    }
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+body.dark{
+    .walletConnect{
+        .popUp{
+            background-color: global.$background-color-dark;
+
+            .wallets__list{
+                border: 1px solid #787878;
+                .wallet__item{
+                    border-bottom: 1px solid #787878;
+                    &:hover{
+                        background-color: global.$dark-color-disable;
+                    }
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+        
+    }
+}

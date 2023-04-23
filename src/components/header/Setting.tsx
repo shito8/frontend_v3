@@ -31,16 +31,16 @@ export  default function  Setting(props: SettingProps) {
     if (newTheme === "light") {
         dispatch({type: 'themeMode', payload: false})
         theme = 'light';
-        dark = 'false';
+        dark = false;
     } else if (newTheme === "dark") {
         dispatch({type: 'themeMode', payload: true})
         theme = 'dark';
-        dark = 'true';
+        dark = true;
     } else {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       dispatch({type: 'themeMode', payload: mediaQuery.matches})
       theme = 'system';
-      dark = mediaQuery.matches.toString();
+      dark = mediaQuery.matches;
     }
     const themeMode = {theme, dark}
     setTheme(theme)

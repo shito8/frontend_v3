@@ -23,14 +23,6 @@ export default function Prueba() {
 
   }, [theme])
 
-  const handleToggle = () => {
-    dispatch({type: 'themeMode', payload: !state?.darkMode})
-    localStorage.setItem('dark-mode', (!state?.darkMode).toString())
-  }
-
-  
-
-
 
 
   const handleThemeChange = (newTheme: string) => {
@@ -98,7 +90,6 @@ export default function Prueba() {
           <button onClick={() => handleThemeChange("system")}>System</button>
         </div>
         <div>{state.darkMode}</div>
-        <button onClick={handleToggle}>BotoM</button>
         <p>{state.darkMode ? "Dark Mode" : "Light Mode"}</p>
 
         <p>Otra cosa</p>

@@ -1,6 +1,7 @@
 export const BLOCKCHAIN = [
     {
         name: 'ERGO',
+        svg: '/img/crypto/ergo-logo.svg#Layer_1',
         symbol: '&#931;',
         wallets: [{
             name: 'Nautilus',
@@ -13,6 +14,7 @@ export const BLOCKCHAIN = [
     },
     {
         name: 'CARDANO',
+        svg: '/img/crypto/cardano-logo.svg#Layer_1',
         symbol: 'A',
         wallets: [{
             name: 'Eternl',
@@ -26,6 +28,7 @@ export const BLOCKCHAIN = [
     },
     {
         name: 'ETHEREUM',
+        svg: '/img/crypto/ethereum-logo.svg#Layer_1',
         symbol: 'E',
         wallets: [{
             name: 'Metamask',

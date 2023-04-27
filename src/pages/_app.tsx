@@ -40,17 +40,20 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [dispatch]);
 
+
+
   useEffect(() => {
     if (window !== undefined) {
-      if (localStorage.getItem("appConfig") === null) {
-        localStorage.setItem('appConfig', JSON.stringify(APPCONFIG));
+      if (sessionStorage.getItem("appConfig") === null) {
+        sessionStorage.setItem('appConfig', JSON.stringify(APPCONFIG));
       } else {
-        const appConfig = JSON.parse(localStorage.getItem("appConfig")!);
+        const appConfig = JSON.parse(sessionStorage.getItem("appConfig")!);
         for(let key in appConfig){
           if(appConfig.hasOwnProperty(key) && appConfig[key].active){
             dispatch({ type: "selectBlockchain", payload: appConfig[key].name });
             dispatch({ type: "walletConnected", payload: appConfig[key].status.connect  });
             dispatch({ type: "walletName", payload: appConfig[key].status.wallet  });
+            
           }
           
         }

@@ -52,7 +52,7 @@ export default function Prueba() {
    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const payload = e.target.value as Blockchain;
     const action: Action = { type: 'selectBlockchain', payload };
-    const appConfig = JSON.parse(localStorage.getItem("appConfig")!);
+    const appConfig = JSON.parse(sessionStorage.getItem("appConfig")!);
     
     for(let key in appConfig){
       if(appConfig.hasOwnProperty(key) && appConfig[key].name === payload){
@@ -68,7 +68,7 @@ export default function Prueba() {
       
     }
 
-    localStorage.setItem('appConfig', JSON.stringify(appConfig))
+    sessionStorage.setItem('appConfig', JSON.stringify(appConfig))
 
   }; 
 
@@ -108,9 +108,9 @@ export default function Prueba() {
         <p>Wallet Name</p>
         <p>{state.walletName === '' ? 'vacio' : state.walletName}</p>
         <p>Address Ergo</p>
-        <p>{state.walletAddressErg}</p>
+        <p>{state.walletAddressErg === '' ? 'Address vacio': state.walletAddressErg}</p>
         <p>Balance Ergo</p>
-        <p>{state.walletBalanceErg}</p>
+        <p>{state.walletBalanceErg === ''? 'Balance vacio': state.walletBalanceErg}</p>
       </main>
     </>
   )

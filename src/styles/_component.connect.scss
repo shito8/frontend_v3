@@ -1,3 +1,5 @@
+//used in module.header
+
 @use './globals' as global;
 
 .connect__menu{
@@ -42,9 +44,25 @@
             justify-content: space-around;
             width: 65%;
             padding: 0 5px;
+            cursor: pointer;
             .wallet__item{
                 display: flex;
             }
+        }
+        .btnDisconnect{
+            position: absolute;
+            top: 80px;
+            right: 70px;
+            cursor: pointer;
+            @include global.btn_header();
+            background-color: global.$background-color-light;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media (min-width: 2000px){
+                right: calc(((100vw - 2000px)/2) + 70px);
+              }
         }
     }
 }
@@ -64,6 +82,9 @@ body.dark{
             background-color: global.$background-color-dark;
             .wallet__balance{
                 border-right: 1px solid #787878;
+            }
+            .btnDisconnect{
+                background-color: global.$background-color-dark;
             }
         }
     }

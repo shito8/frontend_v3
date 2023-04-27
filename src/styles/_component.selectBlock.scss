@@ -1,0 +1,81 @@
+//used in module.header
+
+@use './globals' as global;
+
+.blockchain__menu{
+
+  position: relative;
+
+  .blockchain__selected{
+    @include global.btn_header();
+    padding: 5px;
+    width: 160px;
+    background-color: global.$background-color-light;
+    font-weight: global.$font-weight-semibold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .selected__item{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .blockchain__list{
+    position: absolute;
+    width: 160px;
+    background-color: global.$background-color-light;
+    transform: translateY(-100%);
+    top: 60px;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 6px;
+    &.open{
+      transform: translateY(0%);
+      opacity: 1;
+      z-index: 5;
+  }
+    &.displayOff{
+      display: none;
+    }
+    .blockchain__item{
+      padding-left: 20px;
+      width: 100%;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      &:hover{
+        background-color: global.$primary-color-light;
+      }
+    }
+  }
+}
+
+
+body.dark{
+  .blockchain__menu{
+    .blockchain__selected{
+      background-color: global.$background-color-dark;
+    }
+    .blockchain__list{
+      background-color: global.$background-color-dark;
+      .blockchain__item{
+        &:hover{
+          background-color: global.$primary-color-dark;
+        }
+      }
+    }
+
+
+  }
+}

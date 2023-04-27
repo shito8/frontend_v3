@@ -3,6 +3,9 @@ import Image from 'next/image';
 import { AppContext } from '../../pages/_app';
 import Setting from "../header/Setting";
 import Connect from "../header/Connect";
+import Link from "next/link";
+import SelectBlockchain from "../header/SelectBlockchain";
+import NavMenu from "../NavMenu";
 
 
 
@@ -23,15 +26,20 @@ export default function Header() {
 
     return (
     <header className="header__main">
-        <div className="header__logo">
+        <Link href="/" className="header__logo">
             {
             state?.darkMode ? 
             (<Image src="/img/logo/logo_dark.png" alt="logo" width={786} height={162} priority/>):
             (<Image src="/img/logo/logo.png" alt="logo" width={779} height={162} priority/>)
             }
-        </div>
+        </Link>
         <div className="header__nav">
 
+
+{/*             <Link href='/' target="_blank" className="header__nav__item">
+                Get Moonshine
+            </Link> */}
+            <SelectBlockchain />
             <Connect />
             <div className="setting__button">
                 <svg width="20" height="20" id='icon' onClick={handleSetting}>
@@ -41,6 +49,8 @@ export default function Header() {
                 openSetting && <Setting openSetting={openSetting} setOpenSetting={setOpenSetting} />
                 }
             </div>
+
+            <NavMenu />
         </div>
 
 

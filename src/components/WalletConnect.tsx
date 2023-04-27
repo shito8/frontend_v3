@@ -1,8 +1,10 @@
 import { WalletConnectProps, AppConfig } from "@/types/types";
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef, useCallback } from "react";
 import { AppContext } from "@/pages/_app";
 import Image from "next/image";
 import { BLOCKCHAIN } from "@/utils/blockchain";
+import { it } from "node:test";
+import Link from "next/link";
 
 
 
@@ -14,17 +16,20 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
   const { openWallet, setOpenWallet } = propsConnect;
 
 
+
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: () => {} };
 
   const [isConnected, setIsConnected] = useState(state?.walletConnected);
   const [walletName, setWalletName] = useState<string | undefined>(state?.walletName);
 
+  const [nautilusWallet, setNautilusWallet] = useState<boolean>(true);
+
   const appConfigRef = useRef<AppConfig | null>(null);
 
   useEffect(()=>{
     if(window !== undefined){
-      appConfigRef.current = JSON.parse(localStorage.getItem("appConfig")!);
+      appConfigRef.current = JSON.parse(sessionStorage.getItem("appConfig")!);
     }
   },[])
 
@@ -35,9 +40,12 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
 
   const handleConnectWallet = async (item: string) => {
     if (item === "Nautilus") {
-      console.log("connect ergo");
-      connectNautilus();
-      setWalletName(item);
+      if(nautilusWallet){
+        console.log("connect ergo");
+        connectNautilus();
+        setWalletName(item);
+      }
+
     }
     if (item === "Eternl") {
       console.log("connect cardano");
@@ -54,7 +62,6 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
     setIsConnected(connect);
     if(connect){
       
-      console.log("connect nautilus");
       const addressErg = await ergo.get_change_address();
       dispatch({ type: "walletAddressErg", payload: addressErg });
       const balanceErg = await ergo.get_balance();
@@ -65,7 +72,20 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
     
   };
 
+  const checkWalletErg = ()=>{
+    try{
+      ergoConnector
+    }catch(e){
+      setNautilusWallet(false)
+    }
+    
+  }
+
+
+
+
   useEffect(() => {
+    checkWalletErg();
     if (isConnected) {
       if(state?.blockchain === 'ERGO'){
         setOpenWallet(!openWallet);
@@ -75,7 +95,7 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
           appConfigRef.current.ergo.status.connect = true
           appConfigRef.current.ergo.status.wallet = walletName || ''
         }
-        localStorage.setItem("appConfig", JSON.stringify(appConfigRef.current));
+        sessionStorage.setItem("appConfig", JSON.stringify(appConfigRef.current));
       }
     
     }
@@ -102,7 +122,13 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
                         key={index}
                         onClick={() => handleConnectWallet(item.name)}
                       >
-                        <h2>{item.name}</h2>
+                        <div className="wallet__name">
+                          <h2>{item.name}</h2>
+                          {item.name === "Nautilus" && !nautilusWallet ? (
+                          <Link href='https://chrome.google.com/webstore/detail/nautilus-wallet/gjlmehlldlphhljhpnlddaodbjjcchai' target="_blank"> Install</Link>) : ('')}
+                          {item.name !== "Nautilus" ? (
+                          <p>Not available</p>) : ('')}
+                        </div>
                         <Image
                           src={item.img}
                           alt="wallet"

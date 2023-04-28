@@ -148,3 +148,21 @@ body.dark{
     }
 
 }
+
+.setting__menu.mob{
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    height: 370px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    &.open{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    &.display{
+        display: none;
+    }
+
+}

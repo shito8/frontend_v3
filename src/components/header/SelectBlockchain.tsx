@@ -55,22 +55,27 @@ export default function SelectBlockchain() {
 
 
   return (
-    <div className="blockchain__menu">
+    <div className={`blockchain__menu ${state?.mobileMode ? 'mob': ''}`}>
 
       <div className="blockchain__selected" onClick={handleMenuClick}>
       {BLOCKCHAIN.map((item, index) => {
         return (
-          <div key={index} className="selected__item">
+          <div key={index} >
             {state?.blockchain === item.name ? (
-            <>
-              <svg width="20" height="20" id='icon' >
-                <use href={item.svg}></use>
-              </svg>
-              <p>{item.name}</p>
-              <svg width="14" height="14" id="icon">
-                <use href="/img/assets/chevron-down.svg#icon"></use>
-              </svg>
-            </>):
+            <div className="selected__item">
+              <div className="selected__item__icon">
+                <svg width="20" height="20" id='icon' >
+                  <use href={item.svg}></use>
+                </svg>
+                <p>{item.name}</p>
+              </div>
+              <div>
+                <svg width="14" height="14" id="icon">
+                  <use href="/img/assets/chevron-down.svg#icon"></use>
+                </svg>
+              </div>
+
+            </div>):
             ('')
             }
           </div>)

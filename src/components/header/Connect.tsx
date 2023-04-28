@@ -21,7 +21,6 @@ export default function Connect() {
     try{
       await ergoConnector.nautilus.disconnect();
     }catch(e){
-      console.log('Please install Nautilus Wallet extension');
     }
 
   }, []);
@@ -82,14 +81,14 @@ export default function Connect() {
   }, [ergoConnect, ergoDisconnect]);
 
   return (
-    <div className="connect__menu">
+    <div className={`connect__menu ${state?.mobileMode ? 'mob':''}`}>
       <>
         {state?.walletConnected ? (
           <>
             {BLOCKCHAIN.map((item, index) => {
               return (
                 <div key={index}>
-                  {state?.blockchain === item.name ? (
+                  {state?.blockchain === item.name && !state?.mobileMode ? (
                     <div className="connected__wallet">
                       <div className="wallet__balance">
                         <p>{state?.walletBalanceErg}</p>
@@ -108,9 +107,7 @@ export default function Connect() {
                                   width={20}
                                   height={20}
                                 />
-                              ) : (
-                                ''
-                              )}
+                              ) : ('')}
                             </div>
                           );
                         })}
@@ -133,10 +130,27 @@ export default function Connect() {
                 </div>
               );
             })}
+            {state?.mobileMode ? (
+                <div className="connected__wallet" onClick={()=>setBtnDisconect(!btnDisconect)}>
+                  <svg width="30" height="30" id="icon">
+                    <use href="/img/assets/Wallet_alt.svg#icon"></use>
+                  </svg>
+                  {btnDisconect ? (<div className="btnDisconnect" onClick={handleDisconnect}> Disconnect </div>):('')}
+                </div>
+            ):('')}
           </>
         ) : (
           <div className="connect__wallet">
+            {state?.mobileMode ? (
+              <div onClick={handleConnect}>
+                <svg width="30" height="30" id="icon">
+                  <use href="/img/assets/Wallet_alt.svg#icon"></use>
+                </svg>
+              </div>
+            ):(
             <p onClick={handleConnect}>Connect Wallet</p>
+            )}
+            
           </div>
         )}
       </>

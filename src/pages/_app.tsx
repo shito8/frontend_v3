@@ -62,6 +62,19 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [state.blockchain, state.walletConnected, state.walletName]);
 
+  useEffect(() => {
+    const handleResize = () => {
+
+      if(typeof window !== undefined){
+        const screenWidth = window.innerWidth;
+        dispatch({type: 'mobileMode', payload: screenWidth < 1250})
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  },[state?.mobileMode])
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Header />

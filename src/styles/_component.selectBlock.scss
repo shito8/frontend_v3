@@ -8,8 +8,8 @@
 
   .blockchain__selected{
     @include global.btn_header();
-    padding: 5px;
-    width: 160px;
+    padding: 5px 10px;
+    width: 180px;
     background-color: global.$background-color-light;
     font-weight: global.$font-weight-semibold;
     display: flex;
@@ -17,10 +17,20 @@
     justify-content: center;
     cursor: pointer;
     .selected__item{
+      width: 150px;
       display: flex;
-      gap: 10px;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      .selected__item__icon{
+        display: flex;
+        gap: 10px;
+      }
+      &:last-child{
+        #icon{
+          display: flex;
+          align-items: center;
+        }
+      }
     }
   }
   .blockchain__list{
@@ -77,5 +87,47 @@ body.dark{
     }
 
 
+  }
+}
+
+.blockchain__menu.mob{
+  .blockchain__selected{
+    border-radius: 6px;
+    border: 1px solid global.$primary-color-light;
+    padding: 0px 10px;
+    width: 100%;
+    justify-content: flex-start;
+    .selected__item{
+      width: 210px;
+      .selected__item__icon{
+        #icon{
+          width: 16px;
+          height: 16px;
+        }
+        p{
+          margin: 0;
+        }
+      }
+    }
+  }
+  .blockchain__list{
+    width: 230px;
+    .blockchain__item{
+      #icon{
+        width: 16px;
+        height: 16px;
+      }
+      p{
+        margin: 0;
+      }
+    }
+  }
+}
+
+body.dark{
+  .blockchain__menu.mob{
+    .blockchain__selected{
+      border: 1px solid #787878;
+    }
   }
 }

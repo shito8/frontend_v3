@@ -1,6 +1,7 @@
 
 export interface State {
     darkMode: boolean;
+    mobileMode: boolean;
     blockchain: Blockchain;
     walletConnected: boolean;
     walletAddressErg: string;
@@ -13,7 +14,11 @@ export interface State {
 export interface SettingProps {
     openSetting: boolean;
     setOpenSetting: React.Dispatch<React.SetStateAction<boolean>>;
+    display: boolean;
+    setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+
 
 export interface WalletConnectProps {
     openWallet: boolean;
@@ -29,6 +34,7 @@ export enum Blockchain {
 
 export type Action = 
     | {type: 'themeMode'; payload: boolean}
+    | {type: 'mobileMode'; payload: boolean}
     | {type: 'selectBlockchain'; payload: Blockchain}
     | {type: 'walletConnected'; payload: boolean}
     | {type: 'walletAddressErg'; payload: string}

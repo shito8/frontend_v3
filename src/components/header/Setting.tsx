@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
-import { SettingProps } from "@/types/types";
+import { SettingProps} from "@/types/types";
 import Link from "next/link";
+import SelectBlockchain from "./SelectBlockchain";
 
 export  default function  Setting(props: SettingProps) {
 
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
-  const { openSetting, setOpenSetting } = props;
+  const { openSetting, setOpenSetting, display, setDisplay } = props;
   const [theme, setTheme] = useState('');
   const [isOpenLanguage, setIsOpenLenguage] = useState(false);
 
@@ -56,12 +57,14 @@ export  default function  Setting(props: SettingProps) {
 
 
   return (
-    <div className="setting__menu">
+    <div className={`setting__menu ${display ? '' : 'display'} ${openSetting ? 'open' : ''}  ${state?.mobileMode ? 'mob': ''}`}>
+      {state?.mobileMode ? (''):(
       <div className='close' onClick={handleSetting}>
         <svg width="20" height="20" id='icon' >
           <use href="/img/assets/x.svg#icon"></use>
         </svg>
       </div>
+      )}
       <div className='setting__item'>
         <p>Theme</p>
         <div className="themeMode">
@@ -91,6 +94,19 @@ export  default function  Setting(props: SettingProps) {
           }
         </div>
       </div>
+
+
+      {state?.mobileMode ? (
+        <div className='setting__item'>
+          <p>Select Blockchain</p>
+          <SelectBlockchain />
+        </div>
+       
+        ):('')}
+
+
+
+      
 
       <div className='setting__item'>
         <Link href='https://docs.anetabtc.io/docs/user-guides/wrapping' target="_blank">

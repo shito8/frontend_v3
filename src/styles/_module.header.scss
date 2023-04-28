@@ -13,6 +13,8 @@
     align-items: center;
     justify-content: space-between;
     .header__logo{
+        display: flex;
+        align-items: center;
         img{
             height: 30px;
             width: auto;
@@ -47,28 +49,140 @@
 
 body.dark{
     .header__main{
-
         .header__nav{
-
 /*             .header__nav__item{
                 background-color: global.$background-color-dark;
             } */
-    
             .setting__button{
-                background-color: global.$background-color-dark;
-                
+                background-color: global.$background-color-dark;             
+            }
+        }
+    }
+}
 
+.header__main.mob{
+    @media (max-width: 450px){
+        padding: 5px;
+      }
+
+    .header__logo{
+        width: 30px;
+    }
+    .navigation__group{
+        width: calc(100% - 120px);
+        max-width: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .navigation__item{
+            p{
+                font-weight: global.$font-weight-semibold;
+                color: #323232;      
+              }
+              &:hover{
+                p{
+                    color: global.$primary-color-font;
+                  }
+              }
+              &.active{
+                p{
+                  color: global.$primary-color-font;
+                }
+              }
+        }
+        @media (max-width: 450px){
+            .navigation__item{
+                p{
+                    font-size: 14px;
+                }
+            }
+          }
+    }
+    .setting__group{
+        display: flex;
+        gap: 5px;
+        .setting__button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: global.$background-color-light;
+            border-radius: 10px;
+            .button__menu{
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                width: 24px;
+                height: 24px;
+                border: 0;
+                background: transparent;
+                gap: 4px;
+                div{
+                    background: global.$primary-color-font;
+                    height: 2px;
+                    width: 100%;
+                    border-radius: 5px;
+                    transition: all 0.6s;
+                    transform-origin: left;
+                }
+                &:hover{
+                    cursor: pointer;
+                }
+                &.open{
+                    
+                    div{
+                        margin-left: 5px;
+                        height: 2px;
+                        &:first-child{
+                            transform: rotate(45deg);
+                            width: 17px;
+                        }
+                        &:nth-child(2){
+                            opacity: 0;
+                        }
+                        &:last-child{
+                            transform: rotate(-45deg);
+                            width: 17px;
+                        }
+                    }
+                }
             }
         }
 
     }
 
-
-
 }
 
-
-
-
-
+body.dark{
+    .header__main.mob{
+        .navigation__group{
+            .navigation__item{
+                p{
+                    color: #B1B1B1;     
+                  }
+                  &:hover{
+                    p{
+                        color: global.$secundary-color-font;
+                      }
+                  }
+                  &.active{
+                    p{
+                      color: global.$secundary-color-font;
+                    }
+                  }
+            }
+        }
+        .setting__button{
+            background-color: global.$background-color-dark;
+            .button__menu{
+                div{
+                    background: global.$secundary-color-font;
+                }
+            }
+        }
+    }
+}
 

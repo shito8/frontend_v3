@@ -2,6 +2,7 @@ import { Action, State, Blockchain } from "@/types/types";
 
 export const initialState: State = {
     darkMode: false,
+    mobileMode: false,
     blockchain: Blockchain.ERG,
     walletConnected: false,
     walletAddressErg: '',
@@ -14,6 +15,8 @@ export const reducer = (state: State, action: Action): State =>{
     switch (action.type){
         case 'themeMode':
             return {...state, darkMode: action.payload};
+        case 'mobileMode':
+            return {...state, mobileMode: action.payload};
         case 'selectBlockchain':
             return {...state, blockchain: action.payload};
         case 'walletConnected':

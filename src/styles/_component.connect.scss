@@ -90,3 +90,33 @@ body.dark{
     }
 
 }
+
+.connect__menu.mob{
+    .connect__wallet{
+        width: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        #icon{
+            use{
+                fill: #787878;
+            }
+        }
+    }.connected__wallet{
+        width: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        #icon{
+            use{
+                fill: #76D572;
+            }
+        }
+        .btnDisconnect{
+            right: 16px;
+            width: 90px;
+            font-size: 14px;
+            @media (max-width: 450px){
+                right: 5px;
+              }
+        }
+    }
+}

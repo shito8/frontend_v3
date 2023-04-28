@@ -3,13 +3,139 @@
 @use './globals' as global;
 
 .navMenu{
-  width: 200px;
-  height: 300px;
-  background-color: aquamarine;
+  width: 265px;
+  background-color: global.$background-color-light;
   position: absolute;
   left: 85px;
   top: calc((100vh - 300px)/2);
+  border-radius: 20px;
   @media (min-width: 2000px){
     left: calc(((100vw - 2000px)/2) + 85px);
+  }
+  .chain{
+    background-color: global.$background-color-dark;
+    position: absolute;
+    width: 65px;
+    height: 18px;
+    left: 100px;
+    top: -9px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+      color: #F7931A;
+      font-size: 10px;
+    }
+  }
+  .navigation__group{
+    display: flex;
+    padding: 20px 10px;
+    flex-direction: column;
+    .navigation__item{
+      display: flex;
+      align-items: center;
+      height: 50px;
+      width: 100%;
+      border-radius: 10px;
+      padding: 0 20px;
+      gap: 25px;
+      p{
+        font-weight: global.$font-weight-semibold;
+        color: #323232;
+        img{
+          margin-left: 5px;
+        }
+
+      }
+      &:hover{
+        background-color: global.$light-color-disable;
+      }
+      &.active{
+        background-color: global.$primary-color-light;
+        p{
+          color: global.$primary-color-font;
+        }
+      }
+    }
+    .line{
+      border: 1px solid #32323288;
+      width: 210px;
+      margin: 10px auto;
+    }
+    .social__media{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 15px;
+      a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.25s;
+        #icon{
+          use{
+              fill: #323232;
+          } 
+      }
+      &:hover{
+        scale: 1.05;
+        #icon{
+          use{
+            fill: global.$primary-color-light;
+          }
+        }
+      }
+      }
+    }
+  }
+}
+
+body.dark{
+  .navMenu{
+    background-color: global.$background-color-dark;
+    .chain{
+      background-color: global.$background-color-light;
+      p{
+        color: #84312D;
+
+      }
+    }
+    .navigation__group{
+      .navigation__item{
+        p{
+          color: #B1B1B1;
+        }
+        &:hover{
+          background-color: global.$dark-color-disable;
+        }
+        &.active{
+          background-color: global.$primary-color-dark;
+          p{
+            color: global.$secundary-color-font;
+          }
+        }
+      }
+      .line{
+        border: 1px solid #B1B1B188;
+      }
+      .social__media{
+        a{
+          #icon{
+            use{
+                fill: #B1B1B1;
+            } 
+        }
+          &:hover{
+            #icon{
+              use{
+                fill: global.$primary-color-dark;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

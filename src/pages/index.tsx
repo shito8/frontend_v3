@@ -35,7 +35,6 @@ export default function Home() {
       <main>
         <h1>Bienvenido</h1>
         <h2>Aneta</h2>
-        <Link href='/prueba'>A PRUEBA</Link>
         <p>{state.darkMode ? "Dark Mode" : "Light Mode"}</p>
       </main>
     </>

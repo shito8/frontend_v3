@@ -85,21 +85,14 @@ export default function Prueba() {
         <h1>Bienvenido</h1>
         <h2>Aneta</h2>
         <div>
-          <button onClick={() => handleThemeChange("light")}>Light</button>
-          <button onClick={() => handleThemeChange("dark")}>Dark</button>
-          <button onClick={() => handleThemeChange("system")}>System</button>
+          <span onClick={() => handleThemeChange("light")} style={{cursor: 'pointer'}}>Light</span>
+          <span onClick={() => handleThemeChange("dark")} style={{cursor: 'pointer'}}>Dark</span>
+          <span onClick={() => handleThemeChange("system")} style={{cursor: 'pointer'}}>System</span>
         </div>
-        <div>{state.darkMode}</div>
         <p>{state.darkMode ? "Dark Mode" : "Light Mode"}</p>
 
-        <p>Otra cosa</p>
-        <select value={state.blockchain} onChange={handleSelectChange}>
-          <option value={Blockchain.ERG}>Ergo</option>
-          <option value={Blockchain.ADA}>Cardano</option>
-          <option value={Blockchain.ETH}>Ethereum</option>
-        </select>
-        <p>Seleccion: {state.blockchain}</p>
-        <Link href='/'>A HOME</Link>
+
+
 
         <p>Selected BlockChain</p>
         <p>{state.blockchain}</p>

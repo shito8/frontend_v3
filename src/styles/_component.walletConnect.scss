@@ -7,8 +7,12 @@
     section{
         position: fixed;
         top: 100px;
-        left: calc((100vw - 550px) /2);
-        width: 550px;
+        left: calc((100% - 540px) /2);
+        width: 90%;
+        max-width: 540px;
+        @media (max-width: 600px){
+            left: 5%;
+          }
         .popUp{
             background-color: global.$background-color-light;
             .title__pop{

@@ -138,7 +138,7 @@ function HeaderMobile() {
             <Link href="/prueba" className={active === '/prueba' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/prueba')}>
                 <p>Overview</p>
             </Link>
-            <Link href="/transaction" className={active === '/transaction' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/transaction')}>
+            <Link href="/transactions" className={active === '/transactions' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/transaction')}>
                 <p>Order</p>
             </Link>
       </div>

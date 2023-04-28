@@ -37,7 +37,7 @@ export default function NavMenu() {
           <p>Bridge</p>
           
         </Link>
-        <Link href="/transaction" className={active === '/transaction' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/transaction')}>
+        <Link href="/transactions" className={active === '/transactions' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/transaction')}>
         {state?.darkMode ? (
             <Image src='/img/assets/transactions-dark.png' width={16} height={16} alt='transactions' />
           ): (

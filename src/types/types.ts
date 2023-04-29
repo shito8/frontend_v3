@@ -18,6 +18,11 @@ export interface SettingProps {
     setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface WrappingProps {
+    bridgeWrapActive: boolean;
+    setBridgeWrapActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 
 
 export interface WalletConnectProps {

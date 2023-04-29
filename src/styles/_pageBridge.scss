@@ -1,0 +1,96 @@
+//used in app
+
+@use './globals' as global;
+@use './component.wrapping' as wrapping;
+
+.bridge__page{
+  min-height: calc(100vh - 80px);
+  .bridge__section{
+    width: 600px;
+    background-color: global.$background-color-light;
+    position: absolute;
+    left: calc(((100% + 200px ) - 600px)/2);
+    border-radius: 16px;
+    padding: 20px;
+    @media (max-width: 1400px){
+      left: calc(((100% + 350px ) - 600px)/2);
+    }
+    &.wrap{
+      height: 600px;
+      top: calc((100vh - 600px)/2);
+      @media (max-height: 800px){
+        top: 100px;
+      }
+    }
+    &.unwrap{
+      height: 750px;
+      top: calc((100vh - 750px)/2);
+      @media (max-height: 950px){
+        top: 100px;
+      }
+    }
+    .bridge__options{
+      display: flex;
+      width: 100%;
+      height: 50px;
+      border-radius: 10px;
+      background-color: global.$light-color;
+      .bridge__wrap, .bridge__unwrap{
+        cursor: pointer;
+        position: relative;
+        width: 50%;
+        .selection{
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 2;
+          font-weight: global.$font-weight-semibold;
+
+        }
+        .bridge__wrap__selection, .bridge__unwrap__selection {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .bridge__wrap__selection.unActive{
+            background-color: global.$primary-color-light;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+        .bridge__unwrap__selection.unActive{
+          background-color: global.$primary-color-light;
+          transform: translateX(-100%);
+          transition: transform 0.5s ease-in-out;
+        }
+
+      }
+    }
+  }
+
+
+}
+
+body.dark{
+  .bridge__page{
+    .bridge__section{
+      background-color: global.$background-color-dark;
+    }
+    .bridge__options{
+      background-color: global.$dark-color;
+      .bridge__wrap, .bridge__unwrap{
+        .bridge__wrap__selection.unActive, .bridge__unwrap__selection.unActive{
+          background-color: global.$primary-color-dark;
+        }
+
+      }
+    }
+  }
+}

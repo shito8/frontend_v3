@@ -9,6 +9,9 @@
   left: 85px;
   top: calc((100vh - 300px)/2);
   border-radius: 20px;
+  @media (max-height: 500px){
+    top: 100px;
+  }
   @media (min-width: 2000px){
     left: calc(((100vw - 2000px)/2) + 85px);
   }

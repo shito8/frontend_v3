@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from './_app';
 import { Action, Blockchain } from '@/types/types';
-import Link from 'next/link';
 
 
 

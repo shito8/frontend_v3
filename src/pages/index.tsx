@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import React, { useEffect, useState, useContext } from "react";
-import Link from 'next/link';
 import { AppContext } from './_app';
-import { Action, Blockchain } from '@/types/types';
+import Wrapping from '@/components/bridge/Wrapping';
+
 
 
 
@@ -11,11 +11,11 @@ export default function Home() {
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
+  const [bridgeWrapActive, setBridgeWrapActive] = useState(true);
 
 
-  if (!state) {
-    return <div>Cargando...</div>;
-  }
+
+
   return (
     <>
       <Head>
@@ -32,10 +32,27 @@ export default function Home() {
 	      <meta name="msapplication-TileColor" content="#9bd9f2"/>
 	      <meta name="theme-color" content="#ffffff"/>
       </Head>
-      <main>
-        <h1>Bienvenido</h1>
-        <h2>Aneta</h2>
-        <p>{state.darkMode ? "Dark Mode" : "Light Mode"}</p>
+      <main className='bridge__page'>
+
+        <section className={`bridge__section ${bridgeWrapActive ? 'wrap':'unwrap'}`}>
+
+          <div className='bridge__options'>
+            <div className='bridge__wrap' onClick={()=> setBridgeWrapActive(true)}>
+              <p  className='selection'>Wrap</p>
+              <span className={`bridge__wrap__selection ${bridgeWrapActive ? '' : 'unActive'}`} ></span>
+            </div>
+            <div className='bridge__unwrap' onClick={()=> setBridgeWrapActive(false)}>
+              <p  className='selection'>Unwrap</p>
+              <span className={`bridge__unwrap__selection ${bridgeWrapActive ? 'unActive' : ''}`} ></span>
+            </div>
+          </div>
+
+          <Wrapping                 
+                bridgeWrapActive={bridgeWrapActive}
+                setBridgeWrapActive={setBridgeWrapActive}/>
+
+        </section>
+
       </main>
     </>
   )

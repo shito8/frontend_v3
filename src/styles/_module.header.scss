@@ -24,14 +24,6 @@
         display: flex;
         align-items: center;
         gap: 15px;
-/*         .header__nav__item{
-            @include global.btn_header();
-            background-color: global.$background-color-light;
-            width: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        } */
         .setting__button{
             @include global.btn_header();
             background-color: global.$background-color-light;
@@ -50,9 +42,6 @@
 body.dark{
     .header__main{
         .header__nav{
-/*             .header__nav__item{
-                background-color: global.$background-color-dark;
-            } */
             .setting__button{
                 background-color: global.$background-color-dark;             
             }

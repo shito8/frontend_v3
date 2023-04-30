@@ -51,6 +51,7 @@
         }
         .btnDisconnect{
             position: absolute;
+            z-index: 2;
             top: 80px;
             right: 70px;
             cursor: pointer;

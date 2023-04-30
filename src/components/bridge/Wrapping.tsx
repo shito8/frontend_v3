@@ -147,8 +147,16 @@ function Wrap(props: BridgeWrapProps){
             </svg>
             <p>BTC</p>
           </div>
-          
-          {usdInput === '' ? (''): <p className="token__value">~ $ {usdInput}</p>}
+
+
+          <p className="value__section">
+            {usdInput === '' ? '-'
+              : isNaN(parseFloat(usdInput)) ? '0.00'
+              : `$ ${parseFloat(usdInput).toFixed(2)}`}
+          </p>
+
+
+{/*           {usdInput === '' ? (''): <p className="token__value">~ $ {usdInput}</p>} */}
           
         </div>
 

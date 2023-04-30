@@ -43,8 +43,24 @@ export default function Connect() {
     sessionStorage.setItem('appConfig', JSON.stringify(appConfig))
   }
     
+  useEffect(() => {
+    if(btnDisconect){
+      const handleClickOutside = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
+        if(!target.closest('.btnDisconnect') && !target.closest('.connected__wallet')){
+          setBtnDisconect(false);
+        }
+      }
+      document.addEventListener('pointerdown', handleClickOutside);
+      return () => document.removeEventListener('pointerdown', handleClickOutside);
+    }
+
+},[btnDisconect])
     
-    
+
+  const handleAdrressClick = () => {
+    btnDisconect ? setBtnDisconect(false) : setBtnDisconect(true);
+  }
 
   
 
@@ -131,7 +147,7 @@ export default function Connect() {
               );
             })}
             {state?.mobileMode ? (
-                <div className="connected__wallet" onClick={()=>setBtnDisconect(!btnDisconect)}>
+                <div className="connected__wallet" onClick={handleAdrressClick}>
                   <svg width="30" height="30" id="icon">
                     <use href="/img/assets/Wallet_alt.svg#icon"></use>
                   </svg>

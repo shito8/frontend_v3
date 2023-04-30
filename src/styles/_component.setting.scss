@@ -9,10 +9,10 @@
     right: 0;
     top: 60px;
     width: 260px;
-    height: 290px;
     border-radius: 6px;
     background-color: global.$background-color-light;
-    padding: 20px 15px;
+    padding: 20px 15px 0;
+    z-index: 10;
 
     .close{
         position: absolute;
@@ -80,7 +80,7 @@
                 position: absolute;
                 z-index: 2;
                 border-radius: 6px;
-                background-color: global.$background-color-light;
+                background-color: #DBE4F6;
                 width: 100%;
                 .language__item{
                     display: flex;
@@ -107,7 +107,7 @@
         }
         &:last-child{
             p{
-                margin-bottom: 0;
+                margin-bottom: 0px;
             }
         }
     }
@@ -133,7 +133,7 @@ body.dark{
                     background-color: global.$background-color-dark;
                 }
                 .language__list{
-                    background-color: global.$background-color-dark;
+                    background-color: #222222;
                     .language__item{
                         &:hover{
                             background-color: global.$dark-color-disable;
@@ -153,7 +153,6 @@ body.dark{
     position: fixed;
     top: 80px;
     right: 16px;
-    height: 370px;
     transform: translateY(-100%);
     opacity: 0;
     transition: all 0.5s ease-in-out;

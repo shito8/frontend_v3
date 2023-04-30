@@ -14,6 +14,7 @@ declare const ergo: any;
 declare const ergoConnector: any;
 
 export default function WalletConnect(propsConnect: WalletConnectProps) {
+
   const { openWallet, setOpenWallet } = propsConnect;
 
   const appContext = useContext(AppContext);
@@ -33,6 +34,20 @@ export default function WalletConnect(propsConnect: WalletConnectProps) {
       appConfigRef.current = JSON.parse(sessionStorage.getItem("appConfig")!);
     }
   }, []);
+  
+  useEffect(() => {
+    if(openWallet){
+      const handleClickOutside = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
+        if(!target.closest('.popUp')){
+          setOpenWallet(false);
+        }
+      }
+      document.addEventListener('pointerdown', handleClickOutside);
+      return () => document.removeEventListener('pointerdown', handleClickOutside);
+    }
+
+},[openWallet, setOpenWallet])
 
   const handleConnect = () => {
     setOpenWallet(!openWallet);

@@ -11,14 +11,133 @@
     color: #575757;
   }
   .wrapping__input{
+    position: relative;
     input{
       padding: 0 20px;
       width: 100%;
       height: 100px;
       border-radius: 12px;
       background-color: global.$secondary-color-light;
+      font-size: 40px;
+      font-weight: global.$font-weight-semibold;
+      color: global.$primary-color-input;
+    }
+    .token__input{
+      position: absolute;
+      top: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      right: 20px;
+      align-items: flex-end;
+      &.active{
+        top: 20px;
+      }
+      .token__name{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p{
+          font-size: 24px;
+          font-weight: global.$font-weight-semibold;
+        }
+      }
+      .token__value{
+        color: global.$primary-color-input;
+        font-weight: global.$font-weight-semibold;
+      }
+    }
+    .warning__input{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      padding: 4px 0 10px 10px;
+      gap: 10px;
+      svg#icon{
+        use{
+          fill: #DD524C;
+        }
+      }
+      p{
+        font-size: 14px;
+        color: #DD524C;
+        font-weight: global.$font-weight-semibold;
+      }
     }
     
+  }
+  .wrapping__section{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    .title__section{
+      font-weight: global.$font-weight-semibold;
+      font-size: 20px;
+    }
+    .token__section{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      p{
+        font-size: 24px;
+        font-weight: global.$font-weight-semibold;
+      }
+      .value__section{
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        font-size: 16px;
+        color: global.$primary-color-input;
+        font-weight: global.$font-weight-semibold;
+      }
+    }
+  }
+  .fee__section{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 20px 20px 0px;
+    border-radius: 12px;
+    background-color: global.$secondary-color-light;
+    margin-bottom: 25px;
+    .title__section{
+      font-size: 18px;
+      font-weight: global.$font-weight-semibold;
+      color: global.$primary-color-input;
+    }
+    .token__section{
+      div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p{
+          font-size: 20px;
+          font-weight: global.$font-weight-semibold;
+        }
+      }
+      
+      
+    }
+    .value__section{
+      color: global.$primary-color-input;
+      position: absolute;
+      right: 20px;
+      bottom: 25px;
+    }
+  }
+  .wrapping__button{
+    @include global.btn_main();
+    background-color: global.$primary-color-light;
+    cursor: pointer;
+    &.disabled{
+      background-color: global.$light-color-disable;
+      cursor: not-allowed;
+    }
   }
 }
 
@@ -31,7 +150,280 @@ body.dark{
     .wrapping__input{
       input{
         background-color: global.$secondary-color-dark;
+        color: global.$secundary-color-font;
       }
+      .token__input{
+        .token__value{
+          color: global.$secundary-color-input;
+        }
+      }
+    }
+    .wrapping__section{
+      .token__section{
+        .value__section{
+          color: global.$secundary-color-input;
+        }
+      }
+    }
+    .fee__section{
+      background-color: global.$secondary-color-dark;
+      .title__section{
+        color: global.$secundary-color-input;
+      }
+      .value__section{
+        color: global.$secundary-color-input;
+      }
+    }
+    .wrapping__button{
+      background-color: global.$primary-color-dark;
+      &.disabled{
+        background-color: global.$dark-color-disable;
+      }
+    }
+  }
+}
+
+.wrapping__menu.mob{
+
+  .title{
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .title__input, .title__section{
+    font-size: 14px;
+    color: #575757;
+    margin-bottom: 5px;
+  }
+  .wrapping__input{
+    input{
+      height: 80px;
+      font-size: 24px;
+      padding: 0 16px;
+      border-radius: 10px;
+            &.active{
+        top: 20px;
+      }
+    }
+    .token__input{
+      top: 25px;
+      gap: 5px;
+      right: 16px;
+      &.active{
+        top: 15px;
+      }
+      .token__name{
+        gap: 8px;
+        svg{
+          width: 24px;
+          height: 24px;
+        }
+        p{
+          font-size: 20px;
+        }
+      }
+      .token__value{
+        font-size: 16px;
+      }
+    }
+  }
+  .arrow__section{
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    svg{
+      border: solid 1px global.$primary-color-light;
+      border-radius: 5px;
+    }
+  }
+  .wrapping__section{
+    position: relative;
+    height: 80px;
+    border-radius: 10px;
+    padding: 0 16px;
+    background-color: global.$secondary-color-light;    
+    p{
+      font-size: 24px;
+      font-weight: global.$font-weight-semibold;
+      color: global.$primary-color-input;
+    }
+    .token__section{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      .token__name{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        right: 16px;
+        &.active{
+          top: 15px;
+        }
+        svg{
+          width: 24px;
+          height: 24px;
+        }
+        p{
+          font-size: 20px;
+          color: global.$primary-color-font;
+        }
+      }
+    }
+  }
+  .fee__section{
+    height: 80px;
+    padding: 16px 16px 0px;
+    border-radius: 10px;
+    background-color: global.$background-color-light;
+    margin-bottom: 16px;
+    .title__section{
+      font-size: 16px;
+    }
+    .token__section{
+      div{
+        gap: 8px;
+        p{
+          font-size: 16px;
+        }
+        svg{
+          width: 20px;
+          height: 20px;
+        }
+      }      
+    }
+    .value__section{
+      position: absolute;
+      right: 16px;
+      bottom: 22px;
+      font-size: 14px;
+    }
+  }
+  .wrapping__button{
+    height: 60px;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+  @media (max-width: 500px){
+    .wrapping__input{
+      input{
+        height: 60px;
+        font-size: 20px;
+        padding: 0 10px;
+        border-radius: 6px;
+      }
+      .token__input{
+        top: 20px;
+        gap: 3px;
+        right: 10px;
+        &.active{
+          top: 8px;
+        }
+        .token__name{
+          gap: 5px;
+          svg{
+            width: 16px;
+            height: 16px;
+          }
+          p{
+            font-size: 16px;
+          }
+        }
+        .token__value{
+          font-size: 14px;
+        }
+      }
+    }
+    .wrapping__section{
+      height: 60px;
+      border-radius: 6px;
+      p{
+        font-size: 20px;
+      }
+      
+      .token__section{
+        .token__name{
+          gap: 3px;
+          right: 10px;
+          &.active{
+            top: 8px;
+          }
+          svg{
+            width: 16px;
+            height: 16px;
+          }
+          p{
+            font-size: 16px;
+          }
+        }
+        .value__section{
+          font-size: 14px;
+          right: 10px;
+        }
+      }
+    }
+    .fee__section{
+      height: 60px;
+      padding: 10px 10px 0px;
+      border-radius: 6px;
+      margin-bottom: 0;
+      .title__section{
+        font-size: 14px;
+        padding-right: 10px;
+      }
+      .token__section{
+        div{
+          gap: 5px;
+          p{
+            font-size: 14px;
+          }
+          svg{
+            width: 16px;
+            height: 16px;
+          }
+        }      
+      }
+      .value__section{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+    .wrapping__button{
+      height: 50px;
+      font-size: 16px;
+    }
+    
+
+  }
+
+
+}
+
+body.dark{
+  .wrapping__menu.mob{
+    .title__input, .title__section{
+      color: #CACACA;
+    }
+    .arrow__section{    
+      svg{
+        border: solid 1px #545454;
+      }
+    }
+    .wrapping__section{
+      background-color: global.$secondary-color-dark;
+      p{
+        color: global.$secundary-color-font;
+      }
+      .token__name{
+        p{
+          color: global.$secundary-color-font;
+        }
+      }
+    }
+    .fee__section{
+      background-color: global.$background-color-dark;
     }
   }
 }

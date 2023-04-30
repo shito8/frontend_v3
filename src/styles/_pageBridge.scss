@@ -16,9 +16,8 @@
       left: calc(((100% + 350px ) - 600px)/2);
     }
     &.wrap{
-      height: 600px;
-      top: calc((100vh - 600px)/2);
-      @media (max-height: 800px){
+      top: calc((100vh - 567px)/2);
+      @media (max-height: 767px){
         top: 100px;
       }
     }
@@ -92,5 +91,31 @@ body.dark{
 
       }
     }
+  }
+}
+
+.bridge__page{
+
+  .bridge__section.mob{
+
+      left: calc((100% - 600px)/2);
+      border-radius: 10px;
+
+      @media (max-width: 667px){
+        max-width: 600px;
+        width: 90%;
+        left: 5%;
+      }
+
+      .bridge__options{
+        
+
+        @media (max-width: 500px){
+          height: 40px;
+        }
+
+      }
+
+
   }
 }

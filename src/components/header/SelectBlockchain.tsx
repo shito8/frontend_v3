@@ -10,21 +10,26 @@ export default function SelectBlockchain() {
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
   const [isOpenList, setIsOpenList] = useState(false);
-  const [isDisplay, setIsDisplay] = useState(false);
+
 
   const handleMenuClick = () => {
-    if(isDisplay){
-      setIsOpenList(!isOpenList);
-      setTimeout(()=>{
-        setIsDisplay(false)
-      },500);
-    }else{
-      setIsDisplay(true);
-      setTimeout(()=>{
-        setIsOpenList(!isOpenList);
-      },0);
-    }
+    isOpenList ? setIsOpenList(false) : setIsOpenList(true);
+
   }
+
+  useEffect(() => {
+    if(isOpenList){
+      const handleClickOutside = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
+        if(!target.closest('.blockchain__list') && !target.closest('.blockchain__selected') ){
+          setIsOpenList(false);
+        }
+      }
+      document.addEventListener('pointerdown', handleClickOutside);
+      return () => document.removeEventListener('pointerdown', handleClickOutside);
+    }
+
+},[isOpenList])
 
   const handleDivClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const payload = e.currentTarget.dataset.blockchain as Blockchain;
@@ -47,9 +52,6 @@ export default function SelectBlockchain() {
 
     sessionStorage.setItem('appConfig', JSON.stringify(appConfig))
     setIsOpenList(false);
-    setTimeout(()=>{
-      setIsDisplay(false)
-    },500);
 
   }; 
 
@@ -86,23 +88,24 @@ export default function SelectBlockchain() {
 
 
 
-
-
-
-        <div className={`blockchain__list ${isOpenList ? 'open' : ''} ${isDisplay ? '': 'displayOff'}`}>
+        {isOpenList ? (
+        <div className='blockchain__list'>
   
         {BLOCKCHAIN.map((item, index) => {
           return (
-            <div key={index} className="blockchain__item" onClick={handleDivClick} data-blockchain={item.name}>
-              <svg width="20" height="20" id='icon' >
-                <use href={item.svg}></use>
-              </svg>
-              <p>{item.name}</p>
+          <div key={index} className={`blockchain__item ${state?.blockchain === item.name ? 'active' : ''}`} onClick={handleDivClick} data-blockchain={item.name}>
+            <svg width="20" height="20" id='icon' >
+              <use href={item.svg}></use>
+            </svg>
+            <p>{item.name}</p>
 
-            </div>
-      )})}
-  
-        </div>
+          </div>
+        )})}
+
+  </div>) : ('') }
+
+
+
 
 
       

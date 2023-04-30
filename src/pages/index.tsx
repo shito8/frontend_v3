@@ -2,9 +2,7 @@ import Head from 'next/head'
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from './_app';
 import Wrapping from '@/components/bridge/Wrapping';
-
-
-
+ 
 
 export default function Home() {
 
@@ -12,8 +10,6 @@ export default function Home() {
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
   const [bridgeWrapActive, setBridgeWrapActive] = useState(true);
-
-
 
 
   return (
@@ -34,7 +30,7 @@ export default function Home() {
       </Head>
       <main className='bridge__page'>
 
-        <section className={`bridge__section ${bridgeWrapActive ? 'wrap':'unwrap'}`}>
+        <section className={`bridge__section ${bridgeWrapActive ? 'wrap':'unwrap'} ${state?.mobileMode ? 'mob': ''}`}>
 
           <div className='bridge__options'>
             <div className='bridge__wrap' onClick={()=> setBridgeWrapActive(true)}>
@@ -52,6 +48,7 @@ export default function Home() {
                 setBridgeWrapActive={setBridgeWrapActive}/>
 
         </section>
+
 
       </main>
     </>

@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AppContext } from "@/pages/_app";
+import { useRouter } from "next/router";
 
 export default function NavMenu() {
 
@@ -10,10 +11,20 @@ export default function NavMenu() {
 
   const [active, setActive] = useState('');
 
+  const router = useRouter();
+
   useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      setActive(url);
+    }
     setActive(window.location.pathname);
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    }
+    
   
-  }, []);
+  }, [router.events]);
 
   const handleMenuClick = (menu: string) =>{
     setActive(menu);
@@ -45,13 +56,13 @@ export default function NavMenu() {
           )}
           <p>Transactions</p>
         </Link>
-        <Link href="/prueba" className={active === '/prueba' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/prueba')}>
+        <Link href="/dashboard" className={active === '/dashboard' ? 'navigation__item active' : 'navigation__item'} onClick={() => handleMenuClick('/dashboard')}>
         {state?.darkMode ? (
             <Image src='/img/assets/dashboard-dark.png' width={16} height={16} alt='dashboard' />
           ): (
             <Image src='/img/assets/dashboard-light.png' width={16} height={16} alt='dashboard' />
           )}
-          <p>- Dashboard -</p>
+          <p>Dashboard</p>
           
         </Link>
 
@@ -70,9 +81,9 @@ export default function NavMenu() {
 
         <Link href="https://docs.anetabtc.io" target='_blank' className={'navigation__item'}>
         {state?.darkMode ? (
-            <Image src='/img/assets/feedback-dark.png' width={20} height={20} alt='feedback' />
+            <Image src='/img/assets/docs-dark.png' width={20} height={20} alt='feedback' />
           ): (
-            <Image src='/img/assets/feedback-light.png' width={20} height={20} alt='feedback' />
+            <Image src='/img/assets/docs-light.png' width={20} height={20} alt='feedback' />
           )}
           <p>Docs
           {state?.darkMode ? (

@@ -3,8 +3,11 @@ import { AppContext } from '@/pages/_app';
 import { SettingProps} from "@/types/types";
 import Link from "next/link";
 import SelectBlockchain from "./SelectBlockchain";
+import Image from "next/image";
+
 
 export  default function  Setting(props: SettingProps) {
+
 
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
@@ -24,7 +27,10 @@ export  default function  Setting(props: SettingProps) {
 
 
   const handleSetting = () => {
-    setOpenSetting(false)
+    setOpenSetting(false);
+    setTimeout(()=>{
+      setDisplay(false)
+  },500);
   }
 
   const handleThemeChange = (newTheme: string) => {
@@ -49,10 +55,25 @@ export  default function  Setting(props: SettingProps) {
   };
 
   const handleLanguage = () => {
-    setIsOpenLenguage(!isOpenLanguage)
+    isOpenLanguage ? setIsOpenLenguage(false) : setIsOpenLenguage(true);
+
   }
 
   const languages = ['English', 'Arabic', 'Urdu', 'Bengali']
+
+  useEffect(() => {
+    if(isOpenLanguage){
+      const handleClickOutside = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
+        if(!target.closest('.language__list') && !target.closest('.language')){
+          setIsOpenLenguage(false);
+        }
+      }
+      document.addEventListener('pointerdown', handleClickOutside);
+      return () => document.removeEventListener('pointerdown', handleClickOutside);
+    }
+
+},[isOpenLanguage])
 
 
 
@@ -109,8 +130,8 @@ export  default function  Setting(props: SettingProps) {
       
 
       <div className='setting__item'>
-        <Link href='https://docs.anetabtc.io/docs/user-guides/wrapping' target="_blank">
-        <p>
+        <Link href='https://docs.anetabtc.io/docs/user-guides/wrapping' target="_blank" className="item__link">
+          <p>
             <svg width="14" height="14" id='icon'>
               <use href="/img/assets/question-circle.svg#icon"></use>
             </svg>
@@ -118,6 +139,20 @@ export  default function  Setting(props: SettingProps) {
           </p>
         </Link>  
       </div>
+
+      {state?.mobileMode ? (
+        <div className='setting__item'>
+          <Link href='/feedback'>
+          <p>
+          {state?.darkMode ? (
+              <Image src='/img/assets/feedback-dark.png' width={14} height={14} alt='feedback' />
+            ): (
+              <Image src='/img/assets/feedback-light.png' width={14} height={14} alt='feedback' />
+            )}
+            Feedback</p>
+          </Link>
+        </div>
+      ):('')}
 
       <div className='setting__item'>
         <Link href='https://docs.anetabtc.io/' target="_blank">

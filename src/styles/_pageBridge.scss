@@ -22,9 +22,8 @@
       }
     }
     &.unwrap{
-      height: 750px;
-      top: calc((100vh - 750px)/2);
-      @media (max-height: 950px){
+      top: calc((100vh - 680px)/2);
+      @media (max-height: 880px){
         top: 100px;
       }
     }

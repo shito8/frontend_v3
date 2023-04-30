@@ -2,6 +2,10 @@
 
 @use './globals' as global;
 
+/* ------------------ */
+/* WRAPPING DESKTOP  */
+/* ---------------- */
+
 .wrapping__menu{
   width: 100%;
 
@@ -130,8 +134,26 @@
       bottom: 25px;
     }
   }
+  .section__address{
+    margin-top: 30px;
+    .title__address{
+      font-size: 16px;
+      color: #575757;
+      margin-bottom: 10px;
+    }
+    input{
+      padding: 0 20px;
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      background-color: global.$secondary-color-light;
+      font-size: 16px;
+      font-weight: global.$font-weight-semibold;
+      color: global.$primary-color-input;
+    }
+  }
   .wrapping__button{
-    @include global.btn_main();
+    @include global.btn-main();
     background-color: global.$primary-color-light;
     cursor: pointer;
     &.disabled{
@@ -140,6 +162,10 @@
     }
   }
 }
+
+/* ----------------------- */
+/* WRAPPING DESKTOP DARK  */
+/* --------------------- */
 
 
 body.dark{
@@ -174,6 +200,15 @@ body.dark{
         color: global.$secundary-color-input;
       }
     }
+    .section__address{
+      .title__address{
+        color: #CACACA;
+      }
+      input{
+        background-color: global.$secondary-color-dark;
+        color: global.$secundary-color-font;
+      }
+    }
     .wrapping__button{
       background-color: global.$primary-color-dark;
       &.disabled{
@@ -182,6 +217,10 @@ body.dark{
     }
   }
 }
+
+/* ----------------- */
+/* WRAPPING MOBILE  */
+/* --------------- */
 
 .wrapping__menu.mob{
 
@@ -300,6 +339,19 @@ body.dark{
       font-size: 14px;
     }
   }
+  .section__address{
+    margin-top: 15px;
+    margin-bottom: 25px;
+    .title__address{
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    input{
+      padding: 0 16px;
+      height: 50px;
+      border-radius: 10px;
+    }
+  }
   .wrapping__button{
     height: 60px;
     border-radius: 10px;
@@ -338,6 +390,7 @@ body.dark{
     .wrapping__section{
       height: 60px;
       border-radius: 6px;
+      padding: 0 10px;
       p{
         font-size: 20px;
       }
@@ -390,6 +443,18 @@ body.dark{
         bottom: 10px;
       }
     }
+    .section__address{
+      margin-top: 10px;
+      input{
+        padding: 0 10px;
+        height: 40px;
+        border-radius: 6px;
+        font-size: 14px;
+        &::placeholder{
+          font-size: 14px;
+        }
+      }
+    }
     .wrapping__button{
       height: 50px;
       font-size: 16px;
@@ -400,6 +465,10 @@ body.dark{
 
 
 }
+
+/* -----------------------*/
+/* WRAPPING MOBILE DARK  */
+/* -------------------- */
 
 body.dark{
   .wrapping__menu.mob{

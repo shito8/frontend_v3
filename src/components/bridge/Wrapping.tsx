@@ -2,6 +2,7 @@ import { WrappingProps } from "@/types/types";
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
 import { BLOCKCHAIN } from "@/utils/blockchain";
+import { validate } from 'multicoin-address-validator';
 
 
 
@@ -56,6 +57,8 @@ function Wrap(){
   
     }
  },[valueInput, state?.usdBtc, state?.mobileMode])
+
+
 
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -239,14 +242,21 @@ function Wrap(){
 
 function Unwrap(){
 
-
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
 
   const [valueInput, setValueInput] = useState<string>("");
+  const [addressInput, setAddressInput] = useState<string>("");
   const [usdInput, setUsdInput] = useState<string>("");
   const [tokenWrap, setTokenWrap] = useState<string>("");
+  const [chainWrap, setChainWrap] = useState<string>("");
+  const [svgChainWrap, setSvgChainWrap] = useState<string>("");
   const [checkInput, setCheckInput] = useState<boolean>(false);
+  const [checkAddress, setCheckAddress] = useState<boolean>(false);
+  const [tokenReceive, setTokenReceive] = useState<string>("0.00");
+  const [usdReceive, setUsdReceive] = useState<string>("");
+  const [tokenFee, setTokenFee] = useState<string>("0.00");
+  const [usdFee, setUsdFee] = useState<string>("");
 
  useEffect(() => {
   if(valueInput==='' || state?.usdBtc === '0.00'){
@@ -264,10 +274,33 @@ function Unwrap(){
 
   if(blockchain){
     setTokenWrap(blockchain?.tokenWrap)
+    setChainWrap(blockchain?.ticker)
+    setSvgChainWrap(blockchain?.svg)
   }
   
   
  },[state?.blockchain])
+
+ useEffect(() => {
+  if(valueInput==='' || state?.usdBtc === '0.00'){
+    setUsdInput('');
+    setTokenReceive('0.00');
+    setUsdReceive('');
+    setTokenFee('0.00');
+    setUsdFee('');
+    state?.mobileMode ? setTokenReceive('0') : setTokenReceive('0.00');
+  }else{
+    const value = Number(valueInput);
+    const amount = Number(state?.usdBtc);
+    setUsdInput((value * amount).toFixed(2))
+    setTokenReceive(((value*.995)-0.0001).toFixed(8).replace(/\.?0+$/, ''))
+    setUsdReceive((((value*.995)-0.0001)*amount).toFixed(2))
+    setTokenFee(((value*.005)+0.0001).toFixed(8).replace(/\.?0+$/, ''))
+    setUsdFee((((value*.005)+0.0001)*amount).toFixed(2))
+
+  
+    }
+ },[valueInput, state?.usdBtc, state?.mobileMode])
 
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -280,6 +313,19 @@ function Unwrap(){
     }
 
     parseFloat(value)<0.0006 ? setCheckInput(true) : setCheckInput(false)
+    
+  };
+
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const address = e.target.value;
+    setAddressInput(address);
+    const validAdrres = validate(addressInput, 'BTC', 'testnet');
+    if (validAdrres) {
+      console.log('This is a valid address');
+      } else {
+      console.log('Address INVALID');
+      }
+    validAdrres ? setCheckAddress(true) : setCheckAddress(false);
     
   };
 
@@ -336,6 +382,120 @@ function Unwrap(){
           </div>
         ):('')}
       </div>
+
+      {
+        state?.mobileMode ? (''):(
+          <div className="section__address">
+            <p className="title__address">BTC Destination Address</p>
+            <input
+              type="text"
+              value={addressInput}
+              placeholder="Enter Your BTC Destination Address" 
+              onChange={handleAddressChange}
+        />
+          </div>
+        )
+      }
+
+      {state?.mobileMode ? (
+      <div className="arrow__section">
+        <svg width="32" height="32" id='icon' >
+          <use href='/img/assets/arrow-down-short.svg#icon'></use>
+        </svg>
+      </div>
+      ):('')}
+
+      {state?.mobileMode ? (
+      <>
+      <p className="title__section">You Will Receive</p>
+      <section className="wrapping__section">
+
+        <div className="token__section">
+          <p className='token__input'>{tokenReceive}</p>
+          <div className={`token__name ${usdInput=== ''? '':'active'}`}>
+            <svg width="30" height="30" id='icon' >
+              <use href='/img/crypto/bitcoin-logo.svg#Layer_1'></use>
+            </svg>
+            <p>BTC</p>
+
+          </div>
+          {usdInput === '' ? '': <p className="value__section">= $ {usdReceive}</p>}
+        </div>
+
+      </section>
+
+      </>) : 
+      (<section className="wrapping__section">
+        <p className="title__section">You Will Receive</p>
+
+        <div className="token__section">
+            <svg width="30" height="30" id='icon' >
+              <use href='/img/crypto/bitcoin-logo.svg#Layer_1'></use>
+            </svg>
+          <p>{tokenReceive}</p>
+          <p>BTC</p>
+        {usdInput === '' ? '': <p className="value__section">= $ {usdReceive}</p>}
+        </div>
+      </section>)
+      }
+
+      <section className="fee__section">
+
+        <p className="title__section">Bridge fee</p>
+        <div className="token__section">
+        <div>
+          <svg width="26" height="26" id='icon' >
+              <use href='/img/crypto/wbtc-logo.svg#Layer_1'></use>
+          </svg>
+          <p>{tokenFee}</p>
+          <p>{tokenWrap}</p>
+          <p>+</p>
+          <p>{chainWrap === 'ERG' ? '0.05' : chainWrap === 'ADA' ? '0.5' : '0.0'}</p>
+          <p>{chainWrap}</p>
+        </div>
+
+
+        </div>
+        {usdInput === '' ? '': <p className="value__section">= $ {usdFee}</p>}
+
+      </section>
+
+
+      {
+        state?.mobileMode ? (
+          <div className="section__address">
+            <p className="title__address">BTC Destination Address</p>
+            <input
+              type="text"
+              value={addressInput}
+              placeholder="Enter Your BTC Destination Address" 
+              onChange={handleAddressChange}
+        />
+          </div>
+        ): ('')
+      }
+
+      {state?.walletConnected ?
+        usdInput === '' ? (
+        <button className="wrapping__button disabled">
+          Enter an Amount
+        </button>
+        ) : checkInput ? (
+        <div>
+          <button className="wrapping__button disabled">
+            Invalid Amount
+          </button>
+        </div>
+        ) : (
+          <button className="wrapping__button" /* onClick={handleWrap} */>
+            Wrap BTC
+          </button>
+          )
+          :
+          <button className="wrapping__button disabled">
+            Connect Wallet
+          </button>
+        }
 
 
     </div>

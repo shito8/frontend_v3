@@ -22,7 +22,7 @@
         }
     }
     .connected__wallet{
-        @include global.btn_header();
+        @include global.btn-header();
         padding: 5px;
         width: 310px;
         display: flex;

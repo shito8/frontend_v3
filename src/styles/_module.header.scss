@@ -25,7 +25,7 @@
         align-items: center;
         gap: 15px;
         .setting__button{
-            @include global.btn_header();
+            @include global.btn-header();
             background-color: global.$background-color-light;
             width: 40px;
             position: relative;

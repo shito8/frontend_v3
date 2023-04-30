@@ -46,7 +46,7 @@ function Wrap(){
     state?.mobileMode ? setTokenReceive('0') : setTokenReceive('0.00');
   }else{
     const value = parseFloat(valueInput);
-    const amount = parseFloat(state?.usdBtc || '0.00');
+    const amount = parseFloat(state?.usdBtc || '10.00');
     setUsdInput((value * amount).toFixed(2))
     setTokenReceive((value*.995).toFixed(8).replace(/\.?0+$/, ''))
     setUsdReceive((value*.995*amount).toFixed(2))

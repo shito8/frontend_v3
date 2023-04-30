@@ -31,6 +31,10 @@ export interface WalletConnectProps {
     setOpenWallet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface BridgeWrapProps {
+    priceUsdBTC: string;
+}
+
 
 export enum Blockchain {
     ERG = 'ERGO',

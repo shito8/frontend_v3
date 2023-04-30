@@ -35,14 +35,8 @@ function Wrap(){
   const [usdReceive, setUsdReceive] = useState<string>("");
   const [tokenFee, setTokenFee] = useState<string>("0.00");
   const [usdFee, setUsdFee] = useState<string>("");
-  const [amountUsd,  setAmountUsd] = useState<string>("");
-
-
-
 
  useEffect(() => {
-
-
   if(valueInput==='' || state?.usdBtc === '0.00'){
     setUsdInput('');
     setTokenReceive('0.00');
@@ -51,8 +45,8 @@ function Wrap(){
     setUsdFee('');
     state?.mobileMode ? setTokenReceive('0') : setTokenReceive('0.00');
   }else{
-    const value = parseFloat(valueInput);
-    const amount = parseFloat(state?.usdBtc || '10.00');
+    const value = Number(valueInput);
+    const amount = Number(state?.usdBtc);
     setUsdInput((value * amount).toFixed(2))
     setTokenReceive((value*.995).toFixed(8).replace(/\.?0+$/, ''))
     setUsdReceive((value*.995*amount).toFixed(2))

@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import { Action, State } from "@/types/types";
 import Header from "@/components/layouts/Header";
 import { APPCONFIG } from "@/utils/blockchain";
-
+import { getUsdBTC } from '@/services/getData';
 
 export const AppContext = React.createContext<{
   state: State;
@@ -76,7 +76,12 @@ export default function App({ Component, pageProps }: AppProps) {
     return () => window.removeEventListener("resize", handleResize);
   },[state?.mobileMode])
 
-
+  useEffect(()=>{
+    getUsdBTC().then((data)=>{
+      dispatch({type: 'setUsdBtc', payload: data.USD})
+    });
+    
+}, [dispatch])
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

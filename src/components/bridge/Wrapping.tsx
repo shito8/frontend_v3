@@ -2,30 +2,15 @@ import { WrappingProps } from "@/types/types";
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
 import { BLOCKCHAIN } from "@/utils/blockchain";
-import { getUsdBTC } from '@/services/getData';
-import { BridgeWrapProps } from "@/types/types";
 
 
 
 export default function Wrapping(props: WrappingProps) {
 
-  const appContext = useContext(AppContext);
-  const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
-
-  const [priceUsdBTC, setPriceUsdBTC] = useState<string>("");
-
-  useEffect(()=>{
-    getUsdBTC().then((data)=>{
-      dispatch({type: 'setUsdBtc', payload: data.USD})
-      setPriceUsdBTC(data.USD)
-    });
-    
-}, [dispatch, priceUsdBTC])
-
   const { bridgeWrapActive, setBridgeWrapActive } = props;
 
   if (bridgeWrapActive) {
-    return (<Wrap priceUsdBTC={priceUsdBTC}/>)
+    return (<Wrap />)
 
   }else{
     return (<Unwrap />)
@@ -37,12 +22,10 @@ export default function Wrapping(props: WrappingProps) {
 /* FUNCTION WRAP  */
 /* ------------- */
 
-function Wrap(props: BridgeWrapProps){
+function Wrap(){
 
   const appContext = useContext(AppContext);
   const { state, dispatch } = appContext ?? { state: null, dispatch: ()=> {} }
-
-  const { priceUsdBTC } = props;
 
   const [valueInput, setValueInput] = useState<string>("");
   const [usdInput, setUsdInput] = useState<string>("");
@@ -52,14 +35,15 @@ function Wrap(props: BridgeWrapProps){
   const [usdReceive, setUsdReceive] = useState<string>("");
   const [tokenFee, setTokenFee] = useState<string>("0.00");
   const [usdFee, setUsdFee] = useState<string>("");
+  const [amountUsd,  setAmountUsd] = useState<string>("");
 
 
 
 
  useEffect(() => {
- 
 
-  if(valueInput==='' || priceUsdBTC === '0.00'){
+
+  if(valueInput==='' || state?.usdBtc === '0.00'){
     setUsdInput('');
     setTokenReceive('0.00');
     setUsdReceive('');
@@ -68,7 +52,7 @@ function Wrap(props: BridgeWrapProps){
     state?.mobileMode ? setTokenReceive('0') : setTokenReceive('0.00');
   }else{
     const value = parseFloat(valueInput);
-    const amount = parseFloat(priceUsdBTC);
+    const amount = parseFloat(state?.usdBtc || '10.00');
     setUsdInput((value * amount).toFixed(2))
     setTokenReceive((value*.995).toFixed(8).replace(/\.?0+$/, ''))
     setUsdReceive((value*.995*amount).toFixed(2))
@@ -77,7 +61,7 @@ function Wrap(props: BridgeWrapProps){
 
   
     }
- },[valueInput, state?.mobileMode, priceUsdBTC])
+ },[valueInput, state?.usdBtc, state?.mobileMode])
 
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,16 +131,8 @@ function Wrap(props: BridgeWrapProps){
             </svg>
             <p>BTC</p>
           </div>
-
-
-          <p className="value__section">
-            {usdInput === '' ? '-'
-              : isNaN(parseFloat(usdInput)) ? '0.00'
-              : `$ ${parseFloat(usdInput).toFixed(2)}`}
-          </p>
-
-
-{/*           {usdInput === '' ? (''): <p className="token__value">~ $ {usdInput}</p>} */}
+          
+          {usdInput === '' ? (''): <p className="token__value">~ $ {usdInput}</p>}
           
         </div>
 

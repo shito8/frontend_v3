@@ -7,7 +7,15 @@ type ResponseData = {
 
 const urlUsdBtc = `${process.env.URL_USD_CRYPTO}BTC&tsyms=USD&api_key=${process.env.APIKEY_USD_CRYPTO}`
 
-const auth = `Bearer ${process.env.AUTH}`
+const auth = `Bearer ${process.env.AUTH}`;
+
+const headers = {
+  method: 'GET',
+  headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+  },
+}
 
 
 export default function handler(
@@ -20,7 +28,7 @@ export default function handler(
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-      fetch(urlUsdBtc)
+      fetch(urlUsdBtc, headers)
       .then(res => res.json())
       .then((data) => {
           res.status(200).json({ ...data });

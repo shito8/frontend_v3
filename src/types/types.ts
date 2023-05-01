@@ -8,7 +8,6 @@ export interface State {
     walletBalanceErg: string;
     walletName: string;
     usdBtc: string;
-    amountBtc: string;
     usdAda: string;
     usdErg: string;
 
@@ -68,7 +67,6 @@ export type Action =
     | {type: 'walletBalanceErg'; payload: string}   
     | {type: 'walletName'; payload: string}         
     | {type: 'setUsdBtc'; payload: string}
-    | {type: 'setAmountBtc'; payload: string}
     | {type: 'setUsdAda'; payload: string}
     | {type: 'setUsdErg'; payload: string};
 

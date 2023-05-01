@@ -9,7 +9,6 @@ export const initialState: State = {
     walletBalanceErg: '',
     walletName: '',
     usdBtc: '0.00',
-    amountBtc: '',
     usdAda: '0.00',
     usdErg: '0.00',
 };
@@ -32,8 +31,6 @@ export const reducer = (state: State, action: Action): State =>{
             return {...state, walletName: action.payload};           
         case 'setUsdBtc':
             return {...state, usdBtc: action.payload};
-        case 'setAmountBtc':
-            return {...state, usdBtc: action.payload};   
         case 'setUsdAda':
             return {...state, usdAda: action.payload};
         case 'setUsdErg':

@@ -19,7 +19,7 @@ export default function Wrap(){
   const [usdFee, setUsdFee] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openDepositMenu, setOpenDepositMenu] = useState<boolean>(false);
-  const [openConfirmDeposit, setOpenConfirmDeposit] = useState<boolean>(true);
+  const [openConfirmDeposit, setOpenConfirmDeposit] = useState<boolean>(false);
 
  useEffect(() => {
   if(valueInput==='' || state?.usdBtc === '0.00'){

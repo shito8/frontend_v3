@@ -57,7 +57,7 @@
         background-color: global.$primary-color-light;
       }
       &:hover{
-        background-color: global.$light-color-disable;
+        background-color: global.$light-color-hover;
       }
     }
   }
@@ -76,7 +76,7 @@ body.dark{
           background-color: global.$primary-color-dark;
         }
         &:hover{
-          background-color: global.$dark-color-disable;
+          background-color: global.$dark-color-hover;
         }
       }
     }

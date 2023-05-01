@@ -2,6 +2,7 @@
 
 @use './globals' as global;
 @use './component.wrapping' as wrapping;
+@use './component.depositMenu' as deposit;
 
 .bridge__page{
   min-height: calc(100vh - 80px);

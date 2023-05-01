@@ -1,0 +1,380 @@
+//used in page Bridge
+
+
+@use './globals' as global;
+
+.deposit__menu{
+    @include global.popup();
+    .deposit__section{
+      position: absolute;
+      left: 30px;
+      left: calc(((100% + 200px ) - 570px)/2);
+      top: calc((100vh - 890px)/2);
+      width: 90%;
+      max-width: 570px;
+      @media (max-height: 1000px){
+        top: 50px;
+      }
+      @media (max-width: 1400px){
+        left: calc(((100% + 350px ) - 570px)/2);
+      }
+      .popUp{
+        background-color: global.$background-color-light;
+        padding: 0;
+        border-radius: 16px;
+        .title__pop{
+          height: 100px;
+          width: 100%;
+          border-radius: 16px 16px 0 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-bottom: 10px;
+          .close__pop{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            &#icon{
+              use{
+                fill: #787878;
+              }
+            }
+
+          }
+          h2{
+            font-size: 40px;
+            font-weight: global.$font-weight-semibold;
+          }
+        }
+        .deposit__body{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 20px;
+          .title__body{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            font-size: 26px;
+            font-weight: global.$font-weight-semibold;
+            margin-bottom: 20px;
+          }
+        
+        .section__transaction{
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          width: 90%;
+          gap: 8px;
+          position: relative;
+          margin-bottom: 20px;
+          .pop__copy{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 10px;
+            font-size: 14px;
+            top: 0px;
+            width: 80px;
+            height: 22px;
+            border-radius: 11px;
+            background-color: #DDDDDD;
+            font-weight: global.$font-weight-semibold;
+          }
+          .address__btc{
+            cursor: pointer;
+            border: 1px solid global.$primary-color-light;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 40px;
+          }
+          .countdown{
+            .countdown__time{
+              font-weight: global.$font-weight-extrabold;
+            }
+          }
+        }
+        .section__warning{
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          width: 80%;
+          gap: 15px;
+          margin-bottom: 30px;
+          h2{
+            font-size: 26px;
+            color: global.$warning-color-light;
+            font-weight: global.$font-weight-bold;
+          }
+          p{
+            span{
+              color: global.$warning-color-light;
+              font-weight: global.$font-weight-bold;
+            }
+          }
+        }
+        .section__qr{
+          width: 180px;
+          height: 180px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: global.$background-color-light;
+          margin-bottom: 30px;
+
+        }
+        .section__note{
+          text-align: center;
+          width: 60%;
+          span{
+            font-weight: global.$font-weight-bold;
+          }
+        }
+        .deposit__button{
+          @include global.btn-main();
+          background-color: global.$primary-color-light;
+          margin: 20px 0;
+          width: 90%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          .spinner{
+            @include global.spinner();
+          }
+          &:hover{
+            background-color: global.$light-color-hover;
+          }
+          &.disabled{
+            background-color: global.$light-color-disable;
+            cursor: not-allowed;
+          }
+        }
+
+      }
+    }
+    }
+}
+
+body.dark{
+  .deposit__menu{
+  .deposit__section{
+    .popUp{
+      background-color: global.$background-color-dark;
+      .title__pop{
+          background-color: #0E0E0E;
+      }
+      .section__transaction{
+        .pop__copy{
+          background-color: #787878;
+        }
+        .address__btc{
+          border: 1px solid global.$primary-color-input;
+        }
+      }
+      .section__warning{
+        h2{
+          color: global.$warning-color-dark;
+        }
+        p{
+          span{
+            color: global.$warning-color-dark;
+          }
+        }
+      }
+      .deposit__button{
+        background-color: global.$primary-color-dark;
+        .spinner{
+          border: 3px solid #FFFFFF;
+          border-left-color: transparent;
+        }
+  
+        &:hover{
+          background-color: global.$dark-color-hover;
+        }
+        &.disabled{
+          background-color: global.$dark-color-disable;
+        }
+      }
+    }
+  }
+}
+
+}
+
+.deposit__menu.mob{
+  .deposit__section{
+    left: calc((100% - 570px)/2);
+    .popUp{
+      border-radius: 10px;
+      .title__pop{
+        height: 75px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 8px;
+        .close__pop{
+          top: 8px;
+          right: 8px;
+          &#icon{
+            height: 30px;
+            width: 30px;
+          }
+        }
+        .icon__pop{
+          &#icon{
+            height: 30px;
+            width: 30px;
+          }
+        }
+        h2{
+          font-size: 30px;
+        }
+      }
+      .deposit__body{
+        .title__body{
+          font-size: 20px;
+          margin-bottom: 16px;
+        }
+        .section__transaction{
+          gap: 6px;
+          margin-bottom: 16px;
+          .address__btc{
+            border-radius: 6px;
+            gap: 8px;
+            height: 40px;
+          }
+        }
+        .section__warning{
+          gap: 12px;
+          margin-bottom: 20px;
+          h2{
+            font-size: 20px;
+          }
+        }
+        .section__qr{
+          width: 160px;
+          height: 160px;
+          margin-bottom: 20px;
+        }
+        .deposit__button{
+          height: 60px;
+          border-radius: 10px;
+          font-size: 18px;
+        }
+
+      }
+
+
+
+    }
+    @media (max-width: 633px){
+      max-width: 600px;
+      width: 90%;
+      left: 5%;
+    }
+
+  }
+  @media (max-width: 500px){
+    .deposit__section{
+      .popUp{
+        border-radius: 6px;
+        .title__pop{
+          height: 50px;
+          border-radius: 6px 6px 0 0;
+          margin-bottom: 8px;
+          .close__pop{
+            top: 6px;
+            right: 6px;
+            &#icon{
+              height: 20px;
+              width: 20px;
+            }
+          }
+          .icon__pop{
+            &#icon{
+              height: 20px;
+              width: 20px;
+            }
+          }
+          h2{
+            font-size: 20px;
+          }
+        }
+        .deposit__body{
+          .title__body{
+            font-size: 16px;
+            margin-bottom: 14px;
+          }
+          .section__transaction{
+            gap: 6px;
+            margin-bottom: 14px;
+            p{
+              font-size: 14px;
+            }
+            .pop__copy{
+              right: 8px;
+              font-size: 12px;
+              top: 3px;
+              width: 60px;
+              height: 18px;
+              border-radius: 9px;
+            }
+            .address__btc{
+              border-radius: 4px;
+              gap: 5px;
+              height: 30px;
+              p{
+                font-size: 12px;
+              }
+              img{
+                width: 10px;
+                height: auto;
+              }
+            }
+            .countdown{
+              font-size: 14px;
+              .countdown__time{
+                font-size: 14px;
+              }
+            }
+          }
+          .section__warning{
+            gap: 10px;
+            margin-bottom: 16px;
+            h2{
+              font-size: 18px;
+            }
+            p{
+              font-size: 14px;
+            }
+          }
+          .section__qr{
+            width: 140px;
+            height: 140px;
+            margin-bottom: 16px;
+          }
+          .section__note{
+            font-size: 14px;
+            width: 70%;
+          }
+          .deposit__button{
+            height: 50px;
+            font-size: 16px;
+          }
+  
+        }
+  
+  
+  
+      }
+    }
+
+  }
+}
+

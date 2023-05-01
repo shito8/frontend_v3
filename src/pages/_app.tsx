@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import { Action, State } from "@/types/types";
 import Header from "@/components/layouts/Header";
 import { APPCONFIG } from "@/utils/blockchain";
-import { getUsdBTC } from '@/services/getData';
+import { getUsdBTC, getUsdADA, getUsdERG } from '@/services/getData';
 
 export const AppContext = React.createContext<{
   state: State;
@@ -77,11 +77,25 @@ export default function App({ Component, pageProps }: AppProps) {
   },[state?.mobileMode])
 
   useEffect(()=>{
-    getUsdBTC().then((data)=>{
-      dispatch({type: 'setUsdBtc', payload: data.USD})
-    });
+    const loadData = () => {
+      if(state.usdBtc === '0.00'){
+        getUsdBTC().then((data)=>{
+          dispatch({type: 'setUsdBtc', payload: data.USD})
+        });
+        getUsdADA().then((data)=>{
+          dispatch({type: 'setUsdAda', payload: data.USD})
+        });
+        getUsdERG().then((data)=>{
+          dispatch({type: 'setUsdErg', payload: data.USD})
+        });
+      }
+    }
+  
+
+    loadData();
     
-}, [dispatch])
+}, [state?.usdBtc])
+
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

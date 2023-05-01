@@ -62,6 +62,7 @@ export default function NavMenu() {
           ): (
             <Image src='/img/assets/dashboard-light.png' width={16} height={16} alt='dashboard' />
           )}
+
           <p>Dashboard</p>
           
         </Link>

@@ -10,6 +10,8 @@ export const initialState: State = {
     walletName: '',
     usdBtc: '0.00',
     amountBtc: '',
+    usdAda: '0.00',
+    usdErg: '0.00',
 };
 
 export const reducer = (state: State, action: Action): State =>{
@@ -31,7 +33,11 @@ export const reducer = (state: State, action: Action): State =>{
         case 'setUsdBtc':
             return {...state, usdBtc: action.payload};
         case 'setAmountBtc':
-            return {...state, usdBtc: action.payload};                
+            return {...state, usdBtc: action.payload};   
+        case 'setUsdAda':
+            return {...state, usdAda: action.payload};
+        case 'setUsdErg':
+            return {...state, usdErg: action.payload};             
         default:
             return state;
     }

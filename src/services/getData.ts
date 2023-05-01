@@ -13,3 +13,23 @@ export async function getUsdBTC(){
   const data = await response.json();
   return data;       
 }
+
+export async function getUsdADA(){
+
+  const response = await fetch('api/bridge/usdAda',{
+      method: 'GET',
+      headers: headers
+  });
+  const data = await response.json();
+  return data;       
+}
+
+export async function getUsdERG(){
+
+  const response = await fetch('api/bridge/usdErg',{
+      method: 'GET',
+      headers: headers
+  });
+  const data = await response.json();
+  return data;       
+}

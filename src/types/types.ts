@@ -9,6 +9,8 @@ export interface State {
     walletName: string;
     usdBtc: string;
     amountBtc: string;
+    usdAda: string;
+    usdErg: string;
 
 };
 
@@ -31,6 +33,12 @@ export interface WalletConnectProps {
     setOpenWallet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface DepositProps {
+    valueInput: string;
+    openDepositMenu: boolean;
+    setOpenDepositMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface BridgeWrapProps {
     priceUsdBTC: string;
 }
@@ -51,7 +59,9 @@ export type Action =
     | {type: 'walletBalanceErg'; payload: string}   
     | {type: 'walletName'; payload: string}         
     | {type: 'setUsdBtc'; payload: string}
-    | {type: 'setAmountBtc'; payload: string};
+    | {type: 'setAmountBtc'; payload: string}
+    | {type: 'setUsdAda'; payload: string}
+    | {type: 'setUsdErg'; payload: string};
 
 
 export interface AppConfig {

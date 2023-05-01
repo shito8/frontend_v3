@@ -156,8 +156,18 @@
     @include global.btn-main();
     background-color: global.$primary-color-light;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    .spinner{
+      @include global.spinner();
+    }
+    &:hover{
+      background-color: global.$light-color-hover;
+    }
     &.disabled{
-      background-color: #DDDDDD;
+      background-color: global.$light-color-disable;
       cursor: not-allowed;
     }
   }
@@ -211,8 +221,16 @@ body.dark{
     }
     .wrapping__button{
       background-color: global.$primary-color-dark;
+      .spinner{
+        border: 3px solid #FFFFFF;
+        border-left-color: transparent;
+      }
+
+      &:hover{
+        background-color: global.$dark-color-hover;
+      }
       &.disabled{
-        background-color: #1F509A44;
+        background-color: global.$dark-color-disable;
       }
     }
   }

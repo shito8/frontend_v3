@@ -9,12 +9,14 @@
 
 @mixin popup{
     position: fixed;
+    overflow: auto;
     z-index: 20;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     backdrop-filter: blur(2px);
+    background-color: rgba(125,125,125,0.1);
     .popUp{
         box-shadow: 0px 0px 10px 0px rgba(125,125,125,0.5);
         -webkit-box-shadow: 0px 0px 10px 0px rgba(125,125,125,0.5);
@@ -33,6 +35,26 @@
     font-size: 20px;
 }
 
+@mixin spinner{
+    border: 3px solid gray;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left-color: transparent;
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+
+
 
     $primary-color-light: #B9DDFF;
     $secondary-color-light: #DBE4F6;
@@ -43,13 +65,21 @@
     $secondary-color-dark: #1D1D1D;
     $background-color-dark: #141414;
     $dark-color: #000000;
-    $dark-color-disable: #1F509A88;
-    $light-color-disable: #B9DDFF88;
+    $dark-color-hover: #1F509A99;
+    $light-color-hover: #9BD5ED;
+    $dark-color-disable: #1F509A44;
+    $light-color-disable: #DDDDDD;
 
     $primary-color-font: #121212;
     $secundary-color-font: #FFFFFF;
     $primary-color-input: #757575;
     $secundary-color-input: #D4D4D4;
+
+    $warning-color-dark: #F7931A;
+    $warning-color-light: #EB5B3D;
+
+    $info-color-dark: #1EF71A;
+    $info-color-light: #30B837;
 
 
     $font-weight-regular: 400;
@@ -75,6 +105,9 @@
     list-style: none;
     color: $primary-color-font;
     font-family: $font-family-globals;
+    ::-webkit-scrollbar {
+        display: none;
+      }
 }
 
 input {

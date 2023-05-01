@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
-import { SettingProps} from "@/types/types";
+import { SettingProps } from "@/types/types";
 import Link from "next/link";
 import SelectBlockchain from "./SelectBlockchain";
 import Image from "next/image";

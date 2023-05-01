@@ -7,7 +7,6 @@
     @include global.popup();
     .deposit__section{
       position: absolute;
-      left: 30px;
       left: calc(((100% + 200px ) - 570px)/2);
       top: calc((100vh - 890px)/2);
       width: 90%;
@@ -212,6 +211,11 @@ body.dark{
 .deposit__menu.mob{
   .deposit__section{
     left: calc((100% - 570px)/2);
+    @media (max-width: 633px){
+      max-width: 570px;
+      width: 90%;
+      left: 5%;
+    }
     .popUp{
       border-radius: 10px;
       .title__pop{
@@ -272,11 +276,6 @@ body.dark{
 
 
 
-    }
-    @media (max-width: 633px){
-      max-width: 600px;
-      width: 90%;
-      left: 5%;
     }
 
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
 import { BLOCKCHAIN } from "@/utils/blockchain";
 import DepositMenu from "./DepositMenu";
+import ConfirmDeposit from "./ConfirmDeposit";
 
 export default function Wrap(){
 
@@ -17,7 +18,9 @@ export default function Wrap(){
   const [tokenFee, setTokenFee] = useState<string>("0.00");
   const [usdFee, setUsdFee] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [openDepositMenu, setOpenDepositMenu] = useState<boolean>(true);
+  const [openDepositMenu, setOpenDepositMenu] = useState<boolean>(false);
+  const [openConfirmDeposit, setOpenConfirmDeposit] = useState<boolean>(true);
+
  useEffect(() => {
   if(valueInput==='' || state?.usdBtc === '0.00'){
     setUsdInput('');
@@ -217,7 +220,10 @@ export default function Wrap(){
         }
 
 
-        {openDepositMenu ? (<DepositMenu valueInput={valueInput} openDepositMenu={openDepositMenu} setOpenDepositMenu={setOpenDepositMenu}/>): ('')}
+        {openDepositMenu ? (<DepositMenu valueInput={valueInput} setOpenDepositMenu={setOpenDepositMenu} setOpenConfirmDeposit={setOpenConfirmDeposit}/>): ('')}
+
+        {openConfirmDeposit ? (<ConfirmDeposit valueInput={valueInput} setValueInput={setValueInput} setOpenDepositMenu={setOpenDepositMenu} tokenReceive={tokenReceive} tokenWrap={tokenWrap} setOpenConfirmDeposit={setOpenConfirmDeposit}/>):('')}
+
 
 
 

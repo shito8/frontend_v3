@@ -5,31 +5,25 @@ import { AppContext } from '@/pages/_app';
 import CountDown from "./CountDown";
 import QRCode from "react-qr-code";
 
+
 export default function DepositMenu(props: DepositProps) {
   const addressBtc = `${process.env.NEXT_PUBLIC_ADDRESS_BTC}`
-  const { valueInput, openDepositMenu, setOpenDepositMenu } = props;
+  const { valueInput, setOpenDepositMenu, setOpenConfirmDeposit } = props;
 
   const appContext = useContext(AppContext);
   const { state} = appContext ?? { state: null }
 
   const [copy, setCopy] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
- 
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   useEffect(() => {
-    if(openDepositMenu){
-      const handleClickOutside = (e: PointerEvent) => {
-        const target = e.target as HTMLElement;
-        if(!target.closest('.deposit__section')){
-          setOpenDepositMenu(false);
-        }
-      }
-      document.addEventListener('pointerdown', handleClickOutside);
-      return () => document.removeEventListener('pointerdown', handleClickOutside);
-    }
+    setTimeout(()=>{
+      setIsDisabled(false);
+    },2000)
+  },[])
+ 
 
-},[openDepositMenu, setOpenDepositMenu])
 
 const handleCopy = () => {
   const textCopy = addressBtc;
@@ -47,6 +41,16 @@ const handleCopy = () => {
 
 const handleClose = () => {
   setOpenDepositMenu(false)
+}
+
+const handleClickDeposit = () => {
+
+    setIsLoading(true);
+    setTimeout(()=>{
+      setIsLoading(false);
+      setOpenConfirmDeposit(true);
+  },2000);
+  
 }
 
   return (
@@ -111,15 +115,18 @@ const handleClose = () => {
 
               </div>
 
-              <button className="deposit__button" /* onClick={handleWrap} */>
+              <button className={`deposit__button ${isDisabled ? 'disabled':''}`} onClick={handleClickDeposit}>
                 {isLoading ? (<div className='spinner wrap'></div>):('')}
-                I have sent the deposit
+                {isDisabled ? ('Loading...'):('I have sent the deposit')}
+                
               </button>
 
             </div>
         </div>  
 
       </section>
+
+
 
     </div>
     

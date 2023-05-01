@@ -3,18 +3,19 @@
 @use './globals' as global;
 @use './component.wrapping' as wrapping;
 @use './component.depositMenu' as deposit;
+@use './component.confirm' as confirmDeposit;
 
 .bridge__page{
   min-height: calc(100vh - 80px);
   .bridge__section{
-    width: 600px;
+    width: 570px;
     background-color: global.$background-color-light;
     position: absolute;
-    left: calc(((100% + 200px ) - 600px)/2);
+    left: calc(((100% + 200px ) - 570px)/2);
     border-radius: 16px;
     padding: 20px;
     @media (max-width: 1400px){
-      left: calc(((100% + 350px ) - 600px)/2);
+      left: calc(((100% + 350px ) - 570px)/2);
     }
     &.wrap{
       top: calc((100vh - 567px)/2);
@@ -98,7 +99,7 @@ body.dark{
 
   .bridge__section.mob{
 
-      left: calc((100% - 600px)/2);
+      left: calc((100% - 570px)/2);
       border-radius: 10px;
 
       @media (max-width: 667px){

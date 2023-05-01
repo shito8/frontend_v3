@@ -1,0 +1,296 @@
+//used in page Bridge
+
+@use './globals' as global;
+
+.confirm__menu{
+  @include global.popup();
+  .confirm__section{
+    position: absolute;
+    left: calc(((100% + 200px ) - 570px)/2);
+    top: calc((100vh - 650px)/2);
+    width: 90%;
+    max-width: 570px;
+    @media (max-height: 850px){
+      top: 100px;
+    }
+    @media (max-width: 1400px){
+      left: calc(((100% + 350px ) - 570px)/2);
+    }
+    .popUp{
+      background-color: global.$background-color-light;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      .title__pop{
+        font-size: 20px;
+        font-weight: global.$font-weight-semibold;
+        margin-bottom: 40px;
+      }
+      .confirm__body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .section__result{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 20px;
+          .token__group{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 175px;
+            .token__name{
+              gap: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 50px;
+              width: 80%;
+              background-color: global.$secondary-color-light;
+              border-radius: 10px;
+              border: 1px solid global.$primary-color-light;
+            }
+            .token__value{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 50px;
+              p{
+                font-size: 24px;
+              }
+            }
+          }
+          .arrow__group{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-start;
+            margin: 14px 0;
+            
+            
+          }
+        }
+        .section__note{
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 85%;
+        }
+        .section__info{
+          text-align: center;
+          width: 100%;
+          background-color: global.$secondary-color-light;
+          border-radius: 10px;
+          margin: 20px 0;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .confirm__button{
+          @include global.btn-main();
+          background-color: global.$primary-color-light;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          &:hover{
+            background-color: global.$light-color-hover;
+          }
+          &.disabled{
+            background-color: global.$light-color-disable;
+            cursor: not-allowed;
+          }
+        }
+
+
+
+      }
+
+  }
+}
+}
+
+body.dark{
+  .confirm__menu{
+    
+    .confirm__section{
+
+      .popUp{
+        background-color: global.$background-color-dark;
+        .confirm__body{
+          .section__result{
+            .token__group{
+              .token__name{
+                background-color: global.$secondary-color-dark;
+                border: 1px solid global.$primary-color-input;
+              }
+            }
+          }
+          .section__info{
+            background-color: global.$secondary-color-dark;
+          }
+          .confirm__button{
+            background-color: global.$primary-color-dark;    
+            &:hover{
+              background-color: global.$dark-color-hover;
+            }
+            &.disabled{
+              background-color: global.$dark-color-disable;
+            }
+          }
+
+        }
+
+
+      }
+    }
+  }
+}
+
+.confirm__menu.mob{
+
+  .confirm__section{
+    left: calc((100% - 570px)/2);
+    @media (max-width: 633px){
+      max-width: 570px;
+      width: 90%;
+      left: 5%;
+    }
+    .popUp{
+
+      border: 2px solid global.$primary-color-light;
+      border-radius: 10px;
+      .title__pop{
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .confirm__body{
+
+        .section__result{
+          margin-bottom: 16px;
+          .token__group{
+            width: 160px;
+            .token__name{
+              height: 40px;
+              border-radius: 6px;
+              svg#icon{
+                width: 20px;
+                height: 20px;
+              }
+            }
+            .token__value{
+              height: 40px;
+              p{
+                font-size: 20px;
+              }
+            }
+          }
+          .arrow__group{
+            margin: 12px 0;
+            img{
+              height: 20px;
+              width: auto;
+            }
+            
+          }
+        }
+        .section__note{
+          gap: 8px;
+        }
+        .section__info{
+          border-radius: 6px;
+          margin: 16px 0;
+          padding: 16px;
+          gap: 16px;
+        }
+
+        .confirm__button{
+          margin-top: 16px;
+          height: 60px;
+          border-radius: 10px;
+          font-size: 18px;
+        }
+      }
+  
+    }
+
+    @media (max-width: 500px){
+      .popUp{
+        border-radius: 6px;
+        .title__pop{
+          font-size: 16px;
+          margin-bottom: 16px;
+        }
+
+        .confirm__body{
+
+          .section__result{
+            margin-bottom: 14px;
+            .token__group{
+              width: 100px;
+              .token__name{
+                height: 30px;
+                svg#icon{
+                  width: 16px;
+                  height: 16px;
+                }
+                h3{
+                  font-size: 14px;
+                }
+              }
+              .token__value{
+                height: 30px;
+                p{
+                  font-size: 16px;
+                }
+              }
+            }
+            .arrow__group{
+              margin: 8px 0;
+              img{
+                height: 16px;
+                width: auto;
+              }
+              
+            }
+          }
+
+          .section__info, .section__note{
+            p{
+              font-size: 14px;
+            }
+          }
+
+
+
+
+          .confirm__button{
+            height: 50px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+  }
+
+
+}
+
+
+body.dark{
+
+  .confirm__menu.mob{
+    .confirm__section{
+      .popUp{
+        border: 2px solid #596399;
+      }
+    }
+
+  }
+
+}

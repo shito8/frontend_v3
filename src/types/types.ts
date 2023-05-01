@@ -35,8 +35,17 @@ export interface WalletConnectProps {
 
 export interface DepositProps {
     valueInput: string;
-    openDepositMenu: boolean;
     setOpenDepositMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenConfirmDeposit: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ConfirmProps {
+    valueInput: string;
+    setValueInput: React.Dispatch<React.SetStateAction<string>>;
+    setOpenDepositMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    tokenReceive: string;
+    tokenWrap: string;
+    setOpenConfirmDeposit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface BridgeWrapProps {

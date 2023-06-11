@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from '@/pages/_app';
 import { BLOCKCHAIN } from "@/utils/blockchain";
 import { validate } from 'multicoin-address-validator';
+import WrongAddress from "./WrongAddress";
 
 
 export default function UnWrap(){
@@ -81,7 +82,7 @@ export default function UnWrap(){
     const regex = /^[0-9]-?\d*\.?\d{0,8}$/;
 
 
-    if (regex.test(value) || value === "") {
+    if ((regex.test(value) || value === "") && value.length < 12) {
       setValueInput(value);
     }
 
@@ -96,11 +97,17 @@ export default function UnWrap(){
 
   const handleUnwrap = () => {
     setIsLoading(true);
+    const validAdrres = validate(addressInput, 'BTC', 'testnet');
     setTimeout(()=>{
       setIsLoading(false);
-      const validAdrres = validate(addressInput, 'BTC', 'testnet');
-      setAddressInput(validAdrres ? "true": 'false')
-      validAdrres ? setCheckAddress(true) : setCheckAddress(false);
+      setCheckAddress(validAdrres)
+      if(validAdrres){
+
+      }
+      else{
+        setAddressInput('')
+      }
+        
   },2000);
 
 
@@ -284,6 +291,7 @@ export default function UnWrap(){
           </button>
         }
 
+      <WrongAddress />
 
     </div>
   );

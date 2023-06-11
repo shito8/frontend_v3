@@ -13,6 +13,18 @@ export interface State {
 
 };
 
+export type Action = 
+    | {type: 'themeMode'; payload: boolean}
+    | {type: 'mobileMode'; payload: boolean}
+    | {type: 'selectBlockchain'; payload: Blockchain}
+    | {type: 'walletConnected'; payload: boolean}
+    | {type: 'walletAddressErg'; payload: string}
+    | {type: 'walletBalanceErg'; payload: string}   
+    | {type: 'walletName'; payload: string}         
+    | {type: 'setUsdBtc'; payload: string}
+    | {type: 'setUsdAda'; payload: string}
+    | {type: 'setUsdErg'; payload: string};
+
 export interface SettingProps {
     openSetting: boolean;
     setOpenSetting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -58,17 +70,7 @@ export enum Blockchain {
     ETH = 'ETHEREUM',
 }
 
-export type Action = 
-    | {type: 'themeMode'; payload: boolean}
-    | {type: 'mobileMode'; payload: boolean}
-    | {type: 'selectBlockchain'; payload: Blockchain}
-    | {type: 'walletConnected'; payload: boolean}
-    | {type: 'walletAddressErg'; payload: string}
-    | {type: 'walletBalanceErg'; payload: string}   
-    | {type: 'walletName'; payload: string}         
-    | {type: 'setUsdBtc'; payload: string}
-    | {type: 'setUsdAda'; payload: string}
-    | {type: 'setUsdErg'; payload: string};
+
 
 
 export interface AppConfig {

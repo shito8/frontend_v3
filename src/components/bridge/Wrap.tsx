@@ -51,7 +51,7 @@ export default function Wrap(){
     //const regex = /^[0-9]-?\d*\.?\d{0,8}$/;
     const regex = /^[0-9]-?\d*\.?\d{0,8}$/;
 
-    if (regex.test(value) || value === "") {
+    if ((regex.test(value) || value === "") && value.length < 12) {
       setValueInput(value);
     }
 
@@ -82,7 +82,6 @@ export default function Wrap(){
     inputElement?.addEventListener('wheel',  handleWhell,  {passive: false});
     return () => {
       inputElement?.removeEventListener('wheel',  handleWhell);
-    
     }
   },[])
 

@@ -79,7 +79,12 @@ export  default function  Setting(props: SettingProps) {
 
   return (
     <div className={`setting__menu ${display ? '' : 'display'} ${openSetting ? 'open' : ''}  ${state?.mobileMode ? 'mob': ''}`}>
-      {state?.mobileMode ? (''):(
+      {state?.mobileMode ? (
+        <div className='setting__item'>
+          <p>Select Blockchain</p>
+          <SelectBlockchain />
+        </div>
+      ):(
       <div className='close' onClick={handleSetting}>
         <svg width="20" height="20" id='icon' >
           <use href="/img/assets/x.svg#icon"></use>
@@ -115,16 +120,6 @@ export  default function  Setting(props: SettingProps) {
           }
         </div>
       </div>
-
-
-      {state?.mobileMode ? (
-        <div className='setting__item'>
-          <p>Select Blockchain</p>
-          <SelectBlockchain />
-        </div>
-       
-        ):('')}
-
 
 
       

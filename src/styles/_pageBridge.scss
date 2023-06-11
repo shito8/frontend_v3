@@ -4,6 +4,7 @@
 @use './component.wrapping' as wrapping;
 @use './component.depositMenu' as deposit;
 @use './component.confirm' as confirmDeposit;
+@use './component.wrongAddress' as wrong;
 
 .bridge__page{
   min-height: calc(100vh - 80px);

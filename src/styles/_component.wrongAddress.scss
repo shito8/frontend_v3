@@ -1,0 +1,54 @@
+//used in pageBridge
+
+@use './globals' as global;
+
+.wrong-address{
+  @include global.popup();
+  .wrong-address__pop{
+
+    position: absolute;
+    left: calc(((100% + 200px ) - 250px)/2);
+    top: calc((100vh - 650px)/2);
+    width: 90%;
+    max-width: 250px;
+    @media (max-height: 850px){
+      top: 100px;
+    }
+    @media (max-width: 1400px){
+      left: calc(((100% + 350px ) - 250px)/2);
+    }
+    .popUp{
+      background-color: global.$background-color-light;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border: 2px solid #2E3766;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+    }
+  }
+
+}
+
+body.dark{
+  .wrong-address{
+    .wrong-address__pop{
+        .popUp{
+          background-color: global.$background-color-dark;
+      }
+    }
+  }
+}
+
+.wrong-address.mob{
+  .wrong-address__pop{
+    left: calc((100% - 250px)/2);
+    @media (max-width: 633px){
+      max-width: 250px;
+      width: 90%;
+      left: 5%;
+    }
+  }
+}
